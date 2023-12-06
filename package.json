@@ -3,12 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "true11.11.1",
+    "@emotion/styled": "true11.11.0",
+    "@mui/material": "true5.14.20",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.7.13",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "styled-components": "true6.1.1",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
@@ -33,5 +41,20 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "true6.13.2",
+    "@typescript-eslint/parser": "true6.13.2",
+    "eslint": "^8.0.1",
+    "eslint-config-standard-with-typescript": "true40.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "true7.33.2",
+    "typescript": "*"
+  },
+  "main": "index.js",
+  "repository": "https://github.com/IvanChernykh/cv-generator.git",
+  "author": "IvanChernykh <ivanchernykh98@gmail.com>",
+  "license": "MIT"
 }
