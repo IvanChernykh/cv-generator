@@ -43,14 +43,6 @@
     ]
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "true6.13.2",
-    "@typescript-eslint/parser": "true6.13.2",
-    "eslint": "^8.0.1",
-    "eslint-config-standard-with-typescript": "true40.0.0",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
-    "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-react": "true7.33.2",
     "typescript": "*"
   },
   "main": "index.js",
