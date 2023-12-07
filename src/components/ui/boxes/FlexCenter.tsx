@@ -1,10 +1,7 @@
-import { Box, SxProps } from '@mui/material';
+import { Box, BoxProps } from '@mui/material';
 import React from 'react';
 
-interface IFlexCenterProps {
-  children: React.ReactNode;
-  sx?: SxProps;
-}
+interface IFlexCenterProps extends BoxProps {}
 
 export const FlexCenter: React.FC<IFlexCenterProps> = ({ children, sx }) => {
   return (

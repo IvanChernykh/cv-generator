@@ -6,38 +6,36 @@ import { BackgroundDescription } from '../BackgroundDescription/BackgroundDescri
 import { SectionTitle } from '../../../ui/text/sectionTitle';
 import { SectionSubTitle } from '../../../ui/text/sectionSubTitle';
 
-type Experience = { id: string };
+type EducationType = { id: string };
 
-export const WorkExperience: React.FC = () => {
-  const [experienceList, setExperienceList] = useState<Experience[]>([]);
+export const Education: React.FC = () => {
+  const [educationList, setEducationList] = useState<EducationType[]>([]);
 
   const handleAddItem = () => {
-    setExperienceList([...experienceList, { id: uid() }]);
+    setEducationList([...educationList, { id: uid() }]);
   };
 
   const handleDeleteItem = (id: string) => {
-    setExperienceList(experienceList.filter((item) => item.id !== id));
+    setEducationList(educationList.filter((item) => item.id !== id));
   };
 
   return (
     <Box mb={4}>
-      <SectionTitle>Work Experience</SectionTitle>
-      <SectionSubTitle>
-        Show your relevant experience (last 10 years).
-      </SectionSubTitle>
-      {experienceList.map(({ id }) => (
+      <SectionTitle>Education</SectionTitle>
+      <SectionSubTitle>Describe your education.</SectionSubTitle>
+      {educationList.map(({ id }) => (
         <BackgroundDescription
           key={id}
           id={id}
-          type="workExpeprience"
-          inputLabelOne="Job Title"
-          inputLabelTwo="Employer"
+          type="education"
+          inputLabelOne="School"
+          inputLabelTwo="Degree"
           handleDeleteItem={() => handleDeleteItem(id)}
         />
       ))}
       <AddMoreBtn
-        text="employment"
-        addFirst={!experienceList.length}
+        text="education"
+        addFirst={!educationList.length}
         onClick={handleAddItem}
       />
     </Box>

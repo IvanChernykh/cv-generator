@@ -5,10 +5,15 @@ import { FlexCenter } from '../ui/boxes/FlexCenter';
 import { PersonalDetails } from './components/PersonalDetails/PersonalDetails';
 import { Summary } from './components/Summary/Summary';
 import { WorkExperience } from './components/WorkExperience/WorkExperience';
+import { Links } from './components/Links/Links';
+import { Education } from './components/Education/Education';
+import { Languages } from './components/Languages/Languages';
+import { Courses } from './components/Courses/Courses';
+import { Skills } from './components/Skills/Skills';
 
 const containerStyles: SxProps = {
   paddingTop: '60px',
-  paddingBottom: '60px',
+  paddingBottom: '120px',
   paddingLeft: '48px !important',
   paddingRight: '48px !important',
   height: '100vh',
@@ -32,6 +37,11 @@ export const ResumeConstructorForm: React.FC = () => {
       <PersonalDetails />
       <Summary />
       <WorkExperience />
+      <Education />
+      <Links />
+      <Skills />
+      <Languages />
+      <Courses />
     </Container>
   );
 };
