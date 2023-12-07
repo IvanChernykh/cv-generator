@@ -4,12 +4,12 @@ import { Container, SxProps, TextField, Typography } from '@mui/material';
 import { FlexCenter } from '../ui/boxes/FlexCenter';
 import PersonalDetails from './components/PersonalDetails';
 import Summary from './components/Summary';
-import { WorkExperience } from './components/WorkExperience/WorkExperience';
-import { Links } from './components/Links/Links';
-import { Education } from './components/Education/Education';
-import { Languages } from './components/Languages/Languages';
-import { Courses } from './components/Courses/Courses';
-import { Skills } from './components/Skills/Skills';
+import WorkExperience from './components/WorkExperience';
+import Education from './components/Education';
+import Links from './components/Links';
+import Languages from './components/Languages';
+import Courses from './components/Courses';
+import Skills from './components/Skills';
 
 interface IResumeConstructorFormProps {
   cvName: string;

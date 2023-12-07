@@ -1,22 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
 import { AddMoreBtn } from '../../../ui/addMoreBtn/addMoreBtn';
-import { uid } from '../../../../utils/helpers/generateId';
 import { BackgroundDescription } from '../BackgroundDescription/BackgroundDescription';
 import { SectionTitle } from '../../../ui/text/sectionTitle';
 import { SectionSubTitle } from '../../../ui/text/sectionSubTitle';
+import { IWorkExperience } from '../../../../utils/types/resume';
+import {
+  AddSectionItemPayload,
+  DeleteSectionItemPayload,
+} from '../../../../redux/resume/types';
 
-type Experience = { id: string };
+interface IWorkExperienceProps {
+  workExpeprience: IWorkExperience[];
+  addSectionItem: (payload: AddSectionItemPayload) => void;
+  deleteSectionItem: (payload: DeleteSectionItemPayload) => void;
+}
 
-export const WorkExperience: React.FC = () => {
-  const [experienceList, setExperienceList] = useState<Experience[]>([]);
-
+export const WorkExperience: React.FC<IWorkExperienceProps> = ({
+  workExpeprience,
+  addSectionItem,
+  deleteSectionItem,
+}) => {
   const handleAddItem = () => {
-    setExperienceList([...experienceList, { id: uid() }]);
+    addSectionItem({ field: 'workExpeprience' });
   };
 
   const handleDeleteItem = (id: string) => {
-    setExperienceList(experienceList.filter((item) => item.id !== id));
+    deleteSectionItem({ id, field: 'workExpeprience' });
   };
 
   return (
@@ -25,7 +35,7 @@ export const WorkExperience: React.FC = () => {
       <SectionSubTitle>
         Show your relevant experience (last 10 years).
       </SectionSubTitle>
-      {experienceList.map(({ id }) => (
+      {workExpeprience.map(({ id }) => (
         <BackgroundDescription
           key={id}
           id={id}
@@ -37,7 +47,7 @@ export const WorkExperience: React.FC = () => {
       ))}
       <AddMoreBtn
         text="employment"
-        addFirst={!experienceList.length}
+        addFirst={!workExpeprience.length}
         onClick={handleAddItem}
       />
     </Box>

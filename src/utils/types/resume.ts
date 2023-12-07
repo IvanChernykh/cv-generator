@@ -47,7 +47,7 @@ export interface ILink {
 export interface ISkill {
   id: string;
   title: string;
-  level: number;
+  level: number; // 0 | 20 | 40 | 60 | 80 | 100
 }
 
 export interface ILanguage {
@@ -60,4 +60,5 @@ export interface ICourse {
   id: string;
   course: string;
   institution: string;
+  startEndDate: string;
 }

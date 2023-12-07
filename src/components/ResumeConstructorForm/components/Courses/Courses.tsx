@@ -1,27 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
 import { AddMoreBtn } from '../../../ui/addMoreBtn/addMoreBtn';
-import { uid } from '../../../../utils/helpers/generateId';
 import { BackgroundDescription } from '../BackgroundDescription/BackgroundDescription';
 import { SectionTitle } from '../../../ui/text/sectionTitle';
+import { ICourse } from '../../../../utils/types/resume';
+import {
+  AddSectionItemPayload,
+  DeleteSectionItemPayload,
+} from '../../../../redux/resume/types';
 
-type Course = { id: string };
+interface ICoursesProps {
+  courses: ICourse[];
+  addSectionItem: (payload: AddSectionItemPayload) => void;
+  deleteSectionItem: (payload: DeleteSectionItemPayload) => void;
+}
 
-export const Courses: React.FC = () => {
-  const [coursesList, setCoursesList] = useState<Course[]>([]);
-
+export const Courses: React.FC<ICoursesProps> = ({
+  courses,
+  addSectionItem,
+  deleteSectionItem,
+}) => {
   const handleAddItem = () => {
-    setCoursesList([...coursesList, { id: uid() }]);
+    addSectionItem({ field: 'courses' });
   };
 
   const handleDeleteItem = (id: string) => {
-    setCoursesList(coursesList.filter((item) => item.id !== id));
+    deleteSectionItem({ id, field: 'courses' });
   };
 
   return (
     <Box mb={4}>
       <SectionTitle>Courses</SectionTitle>
-      {coursesList.map(({ id }) => (
+      {courses.map(({ id }) => (
         <BackgroundDescription
           key={id}
           id={id}
@@ -33,7 +43,7 @@ export const Courses: React.FC = () => {
       ))}
       <AddMoreBtn
         text="Course"
-        addFirst={!coursesList.length}
+        addFirst={!courses.length}
         onClick={handleAddItem}
       />
     </Box>

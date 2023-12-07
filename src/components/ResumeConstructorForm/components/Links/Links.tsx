@@ -1,27 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
 import { AddMoreBtn } from '../../../ui/addMoreBtn/addMoreBtn';
-import { uid } from '../../../../utils/helpers/generateId';
 import { LinkItem } from './LinkItem';
 import { SectionTitle } from '../../../ui/text/sectionTitle';
+import { ILink } from '../../../../utils/types/resume';
+import {
+  AddSectionItemPayload,
+  DeleteSectionItemPayload,
+} from '../../../../redux/resume/types';
 
-type Link = { id: string; label: string; link: string };
+interface ILinksProps {
+  links: ILink[];
+  addSectionItem: (payload: AddSectionItemPayload) => void;
+  deleteSectionItem: (payload: DeleteSectionItemPayload) => void;
+}
 
-export const Links: React.FC = () => {
-  const [linkList, setLinkList] = useState<Link[]>([]);
-
+export const Links: React.FC<ILinksProps> = ({
+  links,
+  addSectionItem,
+  deleteSectionItem,
+}) => {
   const handleAddItem = () => {
-    setLinkList([...linkList, { id: uid(), label: '', link: '' }]);
+    addSectionItem({ field: 'links' });
   };
 
   const handleDeleteItem = (id: string) => {
-    setLinkList(linkList.filter((item) => item.id !== id));
+    deleteSectionItem({ id, field: 'links' });
   };
 
   return (
     <Box mb={4}>
       <SectionTitle>Social Links and websites</SectionTitle>
-      {linkList.map(({ id }) => (
+      {links.map(({ id }) => (
         <LinkItem
           key={id}
           id={id}
@@ -30,7 +40,7 @@ export const Links: React.FC = () => {
       ))}
       <AddMoreBtn
         text="link"
-        addFirst={!linkList.length}
+        addFirst={!links.length}
         onClick={handleAddItem}
       />
     </Box>

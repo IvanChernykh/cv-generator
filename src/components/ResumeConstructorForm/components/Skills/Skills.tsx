@@ -1,27 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
 import { AddMoreBtn } from '../../../ui/addMoreBtn/addMoreBtn';
-import { uid } from '../../../../utils/helpers/generateId';
 import { SectionTitle } from '../../../ui/text/sectionTitle';
 import { SkillItem } from './SkillItem';
+import { ISkill } from '../../../../utils/types/resume';
+import {
+  AddSectionItemPayload,
+  DeleteSectionItemPayload,
+} from '../../../../redux/resume/types';
 
-type Skill = { id: string };
+interface ISkillsProps {
+  skills: ISkill[];
+  addSectionItem: (payload: AddSectionItemPayload) => void;
+  deleteSectionItem: (payload: DeleteSectionItemPayload) => void;
+}
 
-export const Skills: React.FC = () => {
-  const [skillsList, setSkillsList] = useState<Skill[]>([]);
-
+export const Skills: React.FC<ISkillsProps> = ({
+  skills,
+  addSectionItem,
+  deleteSectionItem,
+}) => {
   const handleAddItem = () => {
-    setSkillsList([...skillsList, { id: uid() }]);
+    addSectionItem({ field: 'skills' });
   };
 
   const handleDeleteItem = (id: string) => {
-    setSkillsList(skillsList.filter((item) => item.id !== id));
+    deleteSectionItem({ id, field: 'skills' });
   };
 
   return (
     <Box mb={4}>
       <SectionTitle>Skills</SectionTitle>
-      {skillsList.map(({ id }) => (
+      {skills.map(({ id }) => (
         <SkillItem
           key={id}
           id={id}
@@ -30,7 +40,7 @@ export const Skills: React.FC = () => {
       ))}
       <AddMoreBtn
         text="Skill"
-        addFirst={!skillsList.length}
+        addFirst={!skills.length}
         onClick={handleAddItem}
       />
     </Box>

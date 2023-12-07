@@ -1,29 +1,39 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
 import { AddMoreBtn } from '../../../ui/addMoreBtn/addMoreBtn';
-import { uid } from '../../../../utils/helpers/generateId';
 import { BackgroundDescription } from '../BackgroundDescription/BackgroundDescription';
 import { SectionTitle } from '../../../ui/text/sectionTitle';
 import { SectionSubTitle } from '../../../ui/text/sectionSubTitle';
+import { IEducation } from '../../../../utils/types/resume';
+import {
+  AddSectionItemPayload,
+  DeleteSectionItemPayload,
+} from '../../../../redux/resume/types';
 
-type EducationType = { id: string };
+interface IEducationProps {
+  education: IEducation[];
+  addSectionItem: (payload: AddSectionItemPayload) => void;
+  deleteSectionItem: (payload: DeleteSectionItemPayload) => void;
+}
 
-export const Education: React.FC = () => {
-  const [educationList, setEducationList] = useState<EducationType[]>([]);
-
+export const Education: React.FC<IEducationProps> = ({
+  education,
+  addSectionItem,
+  deleteSectionItem,
+}) => {
   const handleAddItem = () => {
-    setEducationList([...educationList, { id: uid() }]);
+    addSectionItem({ field: 'education' });
   };
 
   const handleDeleteItem = (id: string) => {
-    setEducationList(educationList.filter((item) => item.id !== id));
+    deleteSectionItem({ id, field: 'education' });
   };
 
   return (
     <Box mb={4}>
       <SectionTitle>Education</SectionTitle>
       <SectionSubTitle>Describe your education.</SectionSubTitle>
-      {educationList.map(({ id }) => (
+      {education.map(({ id }) => (
         <BackgroundDescription
           key={id}
           id={id}
@@ -35,7 +45,7 @@ export const Education: React.FC = () => {
       ))}
       <AddMoreBtn
         text="education"
-        addFirst={!educationList.length}
+        addFirst={!education.length}
         onClick={handleAddItem}
       />
     </Box>

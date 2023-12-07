@@ -123,6 +123,7 @@ export const BackgroundDescription: React.FC<IBackgroundDescProps> = ({
                       sx={{ background: Colors.grayBg }}
                       value={startDate}
                       onChange={onChangeStartDate}
+                      disableFuture
                     />
                     {type !== 'course' && (
                       <Box>
