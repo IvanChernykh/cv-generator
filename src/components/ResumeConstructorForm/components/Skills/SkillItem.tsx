@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { Grid, Slider, Typography } from '@mui/material';
-import { Input } from '../../../ui/Input/Input';
+import { Grid, Slider, TextField, Typography } from '@mui/material';
 import { AccordionUi } from '../../../ui/accordion/accordion';
+import { SummaryAccordion } from '../../../ui/accordion/summary';
 
 interface ISkillItemProps {
   id: string;
@@ -43,9 +43,14 @@ export const SkillItem: React.FC<ISkillItemProps> = ({
   handleDeleteItem,
 }) => {
   const [level, setLevel] = useState<number>(20);
+  const [skillVal, setSkillVal] = useState<string>('');
 
   const handleLevelChange = (e: any) => {
     setLevel(e.target.value);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSkillVal(e.target.value);
   };
 
   const [levelColor, levelName] = useMemo(() => {
@@ -56,11 +61,19 @@ export const SkillItem: React.FC<ISkillItemProps> = ({
     <AccordionUi
       handleDeleteItem={handleDeleteItem}
       id={id}
-      summary={<>(Empty)</>}
+      summary={
+        <SummaryAccordion showSubtitle title={skillVal} subtitle={levelName} />
+      }
       details={
         <Grid container spacing={4}>
           <Grid item xs={6}>
-            <Input label="Skill" variant="filled" fullWidth />
+            <TextField
+              label="Skill"
+              variant="filled"
+              fullWidth
+              value={skillVal}
+              onChange={handleInputChange}
+            />
           </Grid>
           <Grid item xs={6}>
             <Typography variant="body2" mb={1}>

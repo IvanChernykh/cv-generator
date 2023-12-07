@@ -4,13 +4,13 @@ import {
   DatePicker,
   DatePickerProps,
 } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
 interface IDatePickerProps extends DatePickerProps<Date> {} // or any
 
 export const DatePickerUi: React.FC<IDatePickerProps> = ({ ...props }) => {
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <LocalizationProvider dateAdapter={AdapterMoment}>
       <DatePicker {...props} />
     </LocalizationProvider>
   );

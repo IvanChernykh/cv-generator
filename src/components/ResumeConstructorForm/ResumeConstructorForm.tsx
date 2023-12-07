@@ -1,6 +1,5 @@
-import { Container, SxProps, Typography } from '@mui/material';
+import { Container, SxProps, TextField, Typography } from '@mui/material';
 import React from 'react';
-import { Input } from '../ui/Input/Input';
 import { FlexCenter } from '../ui/boxes/FlexCenter';
 import { PersonalDetails } from './components/PersonalDetails/PersonalDetails';
 import { Summary } from './components/Summary/Summary';
@@ -32,7 +31,7 @@ export const ResumeConstructorForm: React.FC = () => {
         CV Name
       </Typography>
       <FlexCenter sx={{ mb: 8 }}>
-        <Input value="Your CV" />
+        <TextField value="Your CV" />
       </FlexCenter>
       <PersonalDetails />
       <Summary />
