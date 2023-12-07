@@ -10,7 +10,7 @@ import {
 import { AccordionUi } from '../../../ui/accordion/accordion';
 import { TextAreaUi } from '../../../ui/textarea/textarea';
 import { DatePickerUi } from '../../../ui/datePicker/datePicker';
-import { Colors } from '../../../../helpers/constants/colors';
+import { Colors } from '../../../../utils/constants/colors';
 import { SummaryAccordion } from '../../../ui/accordion/summary';
 import moment from 'moment';
 

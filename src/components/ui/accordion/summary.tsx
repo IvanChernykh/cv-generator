@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material';
 import React from 'react';
-import { Colors } from '../../../helpers/constants/colors';
+import { Colors } from '../../../utils/constants/colors';
 
 interface ISummaryProps {
   title?: string;

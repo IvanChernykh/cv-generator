@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box } from '@mui/material';
 import { AddMoreBtn } from '../../../ui/addMoreBtn/addMoreBtn';
-import { uid } from '../../../../helpers/generateId';
+import { uid } from '../../../../utils/helpers/generateId';
 import { BackgroundDescription } from '../BackgroundDescription/BackgroundDescription';
 import { SectionTitle } from '../../../ui/text/sectionTitle';
 import { SectionSubTitle } from '../../../ui/text/sectionSubTitle';
