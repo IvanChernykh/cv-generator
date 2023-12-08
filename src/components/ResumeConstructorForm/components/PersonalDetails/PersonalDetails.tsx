@@ -43,6 +43,7 @@ export const PersonalDetails: React.FC<IPersonalDetailsProps> = ({
             label="First Name"
             fullWidth
             sx={{ mb: 4 }}
+            value={details.firstName}
             onChange={(e) => {
               handleUpdateInput('firstName', e.target.value);
             }}
@@ -52,6 +53,7 @@ export const PersonalDetails: React.FC<IPersonalDetailsProps> = ({
             label="Email"
             fullWidth
             sx={{ mb: 4 }}
+            value={details.email}
             onChange={(e) => {
               handleUpdateInput('email', e.target.value);
             }}
@@ -61,6 +63,7 @@ export const PersonalDetails: React.FC<IPersonalDetailsProps> = ({
             label="LinkedIn"
             fullWidth
             sx={{ mb: 4 }}
+            value={details.linkedIn}
             onChange={(e) => {
               handleUpdateInput('linkedIn', e.target.value);
             }}
@@ -75,6 +78,7 @@ export const PersonalDetails: React.FC<IPersonalDetailsProps> = ({
             label="Last Name"
             fullWidth
             sx={{ mb: 4 }}
+            value={details.lastName}
             onChange={(e) => {
               handleUpdateInput('lastName', e.target.value);
             }}
@@ -84,6 +88,7 @@ export const PersonalDetails: React.FC<IPersonalDetailsProps> = ({
             label="Phone"
             fullWidth
             sx={{ mb: 4 }}
+            value={details.phone}
             onChange={(e) => {
               handleUpdateInput('phone', e.target.value);
             }}
@@ -93,6 +98,7 @@ export const PersonalDetails: React.FC<IPersonalDetailsProps> = ({
             label="City"
             fullWidth
             sx={{ mb: 4 }}
+            value={details.city}
             onChange={(e) => {
               handleUpdateInput('city', e.target.value);
             }}
