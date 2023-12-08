@@ -8,18 +8,24 @@ import { IWorkExperience } from '../../../../utils/types/resume';
 import {
   AddSectionItemPayload,
   DeleteSectionItemPayload,
+  UpdateSectionItemPayload,
+  WorkExperienceFields,
 } from '../../../../redux/resume/types';
 
 interface IWorkExperienceProps {
   workExpeprience: IWorkExperience[];
   addSectionItem: (payload: AddSectionItemPayload) => void;
   deleteSectionItem: (payload: DeleteSectionItemPayload) => void;
+  updateSectionItem: (
+    payload: UpdateSectionItemPayload<WorkExperienceFields>,
+  ) => void;
 }
 
 export const WorkExperience: React.FC<IWorkExperienceProps> = ({
   workExpeprience,
   addSectionItem,
   deleteSectionItem,
+  updateSectionItem,
 }) => {
   const handleAddItem = () => {
     addSectionItem({ field: 'workExpeprience' });
@@ -29,20 +35,52 @@ export const WorkExperience: React.FC<IWorkExperienceProps> = ({
     deleteSectionItem({ id, field: 'workExpeprience' });
   };
 
+  const handleUpdateItem = (
+    id: string,
+    value: string,
+    field: WorkExperienceFields,
+  ) => {
+    updateSectionItem({
+      id,
+      value,
+      field,
+      list: 'workExpeprience',
+    });
+  };
+
   return (
     <Box mb={4}>
       <SectionTitle>Work Experience</SectionTitle>
       <SectionSubTitle>
         Show your relevant experience (last 10 years).
       </SectionSubTitle>
-      {workExpeprience.map(({ id }) => (
+      {workExpeprience.map(({ id, description, city, jobTitle, employer }) => (
         <BackgroundDescription
           key={id}
           id={id}
           type="workExpeprience"
           inputLabelOne="Job Title"
           inputLabelTwo="Employer"
+          description={description}
+          city={city}
+          inputOne={jobTitle}
+          inputTwo={employer}
           handleDeleteItem={() => handleDeleteItem(id)}
+          updateDescription={(value: string) => {
+            handleUpdateItem(id, value, 'description');
+          }}
+          updateStartEndDate={(value: string) => {
+            handleUpdateItem(id, value, 'startEndDate');
+          }}
+          updateCity={(value: string) => {
+            handleUpdateItem(id, value, 'city');
+          }}
+          updateInputOne={(value: string) => {
+            handleUpdateItem(id, value, 'jobTitle');
+          }}
+          updateInputTwo={(value: string) => {
+            handleUpdateItem(id, value, 'employer');
+          }}
         />
       ))}
       <AddMoreBtn

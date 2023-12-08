@@ -26,6 +26,7 @@ export interface IWorkExperience {
   id: string;
   jobTitle: string;
   employer: string;
+  city: string;
   startEndDate: string;
   description: string;
 }
@@ -34,6 +35,7 @@ export interface IEducation {
   id: string;
   school: string;
   degree: string;
+  city: string;
   startEndDate: string;
   description: string;
 }

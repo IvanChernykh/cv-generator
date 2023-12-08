@@ -7,11 +7,8 @@ import {
 import { StoreType } from '../../../../redux/rootReducer';
 
 export default connect(
-  (state: StoreType) => {
-    console.log(state);
-    return {
-      details: state.resume.details,
-    };
-  },
+  (state: StoreType) => ({
+    details: state.resume.details,
+  }),
   { setDetailsFields, setDetailsPhoto },
 )(PersonalDetails);

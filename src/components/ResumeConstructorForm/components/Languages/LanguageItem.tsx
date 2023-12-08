@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   FormControl,
   Grid,
@@ -10,10 +10,18 @@ import {
 } from '@mui/material';
 import { AccordionUi } from '../../../ui/accordion/accordion';
 import { SummaryAccordion } from '../../../ui/accordion/summary';
+import { ILanguage } from '../../../../utils/types/resume';
+import {
+  LanguagesFields,
+  UpdateSectionItemPayload,
+} from '../../../../redux/resume/types';
 
 interface ILanguageItemProps {
-  id: string;
+  language: ILanguage;
   handleDeleteItem: () => void;
+  updateSectionItem: (
+    payload: UpdateSectionItemPayload<LanguagesFields>,
+  ) => void;
 }
 
 enum LangLevels {
@@ -26,25 +34,35 @@ enum LangLevels {
 }
 
 export const LanguageItem: React.FC<ILanguageItemProps> = ({
-  id,
+  language,
   handleDeleteItem,
+  updateSectionItem,
 }) => {
-  const [lang, setLang] = useState<string>('');
-  const [level, setLevel] = useState<string>('');
+  const { id, title, level } = language;
 
   const handleChangeSelect = (e: SelectChangeEvent) => {
-    setLevel(e.target.value);
+    updateSectionItem({
+      id,
+      list: 'languages',
+      field: 'level',
+      value: e.target.value,
+    });
   };
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLang(e.target.value);
+    updateSectionItem({
+      id,
+      list: 'languages',
+      field: 'title',
+      value: e.target.value,
+    });
   };
 
   return (
     <AccordionUi
       handleDeleteItem={handleDeleteItem}
-      id={id}
-      summary={<SummaryAccordion title={lang} subtitle={level} />}
+      id={language.id}
+      summary={<SummaryAccordion title={title} subtitle={level} />}
       details={
         <Grid container spacing={4}>
           <Grid item xs={6}>
@@ -52,7 +70,7 @@ export const LanguageItem: React.FC<ILanguageItemProps> = ({
               label="Language"
               variant="filled"
               fullWidth
-              value={lang}
+              value={title}
               onChange={handleChangeInput}
             />
           </Grid>
@@ -62,7 +80,6 @@ export const LanguageItem: React.FC<ILanguageItemProps> = ({
               <Select
                 labelId={`${id}-level`}
                 value={level}
-                label="Age"
                 onChange={handleChangeSelect}
               >
                 <MenuItem value={LangLevels.a1}>{LangLevels.a1}</MenuItem>

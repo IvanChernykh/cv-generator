@@ -7,18 +7,22 @@ import { ISkill } from '../../../../utils/types/resume';
 import {
   AddSectionItemPayload,
   DeleteSectionItemPayload,
+  SkillsFields,
+  UpdateSectionItemPayload,
 } from '../../../../redux/resume/types';
 
 interface ISkillsProps {
   skills: ISkill[];
   addSectionItem: (payload: AddSectionItemPayload) => void;
   deleteSectionItem: (payload: DeleteSectionItemPayload) => void;
+  updateSectionItem: (payload: UpdateSectionItemPayload<SkillsFields>) => void;
 }
 
 export const Skills: React.FC<ISkillsProps> = ({
   skills,
   addSectionItem,
   deleteSectionItem,
+  updateSectionItem,
 }) => {
   const handleAddItem = () => {
     addSectionItem({ field: 'skills' });
@@ -31,11 +35,12 @@ export const Skills: React.FC<ISkillsProps> = ({
   return (
     <Box mb={4}>
       <SectionTitle>Skills</SectionTitle>
-      {skills.map(({ id }) => (
+      {skills.map((item) => (
         <SkillItem
-          key={id}
-          id={id}
-          handleDeleteItem={() => handleDeleteItem(id)}
+          key={item.id}
+          skill={item}
+          updateSectionItem={updateSectionItem}
+          handleDeleteItem={() => handleDeleteItem(item.id)}
         />
       ))}
       <AddMoreBtn

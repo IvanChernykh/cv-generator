@@ -1,4 +1,13 @@
-import { IDetails, IResume } from '../../utils/types/resume';
+import {
+  ICourse,
+  IDetails,
+  IEducation,
+  ILanguage,
+  ILink,
+  IResume,
+  ISkill,
+  IWorkExperience,
+} from '../../utils/types/resume';
 
 export interface IResumeState extends IResume {}
 
@@ -19,4 +28,18 @@ export type AddSectionItemPayload = {
 export type DeleteSectionItemPayload = {
   id: string;
   field: SectionsWithLists;
+};
+
+export type WorkExperienceFields = keyof Omit<IWorkExperience, 'id'>;
+export type EducationFields = keyof Omit<IEducation, 'id'>;
+export type LinksFields = keyof Omit<ILink, 'id'>;
+export type SkillsFields = keyof Omit<ISkill, 'id'>;
+export type LanguagesFields = keyof Omit<ILanguage, 'id'>;
+export type CoursesFields = keyof Omit<ICourse, 'id'>;
+
+export type UpdateSectionItemPayload<T> = {
+  id: string;
+  list: SectionsWithLists;
+  field: T;
+  value: string | number;
 };

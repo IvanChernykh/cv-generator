@@ -10,6 +10,7 @@ import {
 export const defaultWorkExperienceNoId: Omit<IWorkExperience, 'id'> = {
   jobTitle: '',
   employer: '',
+  city: '',
   startEndDate: '',
   description: '',
 };
@@ -17,6 +18,7 @@ export const defaultWorkExperienceNoId: Omit<IWorkExperience, 'id'> = {
 export const defaultEducationNoId: Omit<IEducation, 'id'> = {
   school: '',
   degree: '',
+  city: '',
   startEndDate: '',
   description: '',
 };

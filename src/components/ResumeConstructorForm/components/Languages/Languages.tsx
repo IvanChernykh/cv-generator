@@ -7,16 +7,22 @@ import { ILanguage } from '../../../../utils/types/resume';
 import {
   AddSectionItemPayload,
   DeleteSectionItemPayload,
+  LanguagesFields,
+  UpdateSectionItemPayload,
 } from '../../../../redux/resume/types';
 
 interface ILanguagesProps {
   languages: ILanguage[];
+  updateSectionItem: (
+    payload: UpdateSectionItemPayload<LanguagesFields>,
+  ) => void;
   addSectionItem: (payload: AddSectionItemPayload) => void;
   deleteSectionItem: (payload: DeleteSectionItemPayload) => void;
 }
 
 export const Languages: React.FC<ILanguagesProps> = ({
   languages,
+  updateSectionItem,
   addSectionItem,
   deleteSectionItem,
 }) => {
@@ -31,11 +37,12 @@ export const Languages: React.FC<ILanguagesProps> = ({
   return (
     <Box mb={4}>
       <SectionTitle>Languages</SectionTitle>
-      {languages.map(({ id }) => (
+      {languages.map((item) => (
         <LanguageItem
-          key={id}
-          id={id}
-          handleDeleteItem={() => handleDeleteItem(id)}
+          key={item.id}
+          language={item}
+          updateSectionItem={updateSectionItem}
+          handleDeleteItem={() => handleDeleteItem(item.id)}
         />
       ))}
       <AddMoreBtn

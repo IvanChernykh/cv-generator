@@ -4,6 +4,7 @@ import { StoreType } from '../../../../redux/rootReducer';
 import {
   addSectionItem,
   deleteSectionItem,
+  updateSectionItem,
 } from '../../../../redux/resume/actions';
 import { Courses } from './Courses';
 
@@ -14,5 +15,6 @@ export default connect(
   {
     addSectionItem,
     deleteSectionItem,
+    updateSectionItem,
   },
 )(Courses);

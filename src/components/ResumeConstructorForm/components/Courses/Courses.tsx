@@ -6,19 +6,23 @@ import { SectionTitle } from '../../../ui/text/sectionTitle';
 import { ICourse } from '../../../../utils/types/resume';
 import {
   AddSectionItemPayload,
+  CoursesFields,
   DeleteSectionItemPayload,
+  UpdateSectionItemPayload,
 } from '../../../../redux/resume/types';
 
 interface ICoursesProps {
   courses: ICourse[];
   addSectionItem: (payload: AddSectionItemPayload) => void;
   deleteSectionItem: (payload: DeleteSectionItemPayload) => void;
+  updateSectionItem: (payload: UpdateSectionItemPayload<CoursesFields>) => void;
 }
 
 export const Courses: React.FC<ICoursesProps> = ({
   courses,
   addSectionItem,
   deleteSectionItem,
+  updateSectionItem,
 }) => {
   const handleAddItem = () => {
     addSectionItem({ field: 'courses' });
@@ -28,17 +32,41 @@ export const Courses: React.FC<ICoursesProps> = ({
     deleteSectionItem({ id, field: 'courses' });
   };
 
+  const handleUpdateItem = (
+    id: string,
+    value: string,
+    field: CoursesFields,
+  ) => {
+    updateSectionItem({
+      id,
+      value,
+      field,
+      list: 'courses',
+    });
+  };
+
   return (
     <Box mb={4}>
       <SectionTitle>Courses</SectionTitle>
-      {courses.map(({ id }) => (
+      {courses.map(({ id, course, institution }) => (
         <BackgroundDescription
           key={id}
           id={id}
           type="course"
           inputLabelOne="Course"
           inputLabelTwo="Institution"
+          inputOne={course}
+          inputTwo={institution}
           handleDeleteItem={() => handleDeleteItem(id)}
+          updateStartEndDate={(value: string) => {
+            handleUpdateItem(id, value, 'startEndDate');
+          }}
+          updateInputOne={(value: string) => {
+            handleUpdateItem(id, value, 'course');
+          }}
+          updateInputTwo={(value: string) => {
+            handleUpdateItem(id, value, 'institution');
+          }}
         />
       ))}
       <AddMoreBtn

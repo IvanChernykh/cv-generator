@@ -6,12 +6,14 @@ import {
   setDetailsPhoto,
   addSectionItem,
   deleteSectionItem,
+  updateSectionItem,
 } from './actions';
 import {
   AddSectionItemPayload,
   DeleteSectionItemPayload,
   IResumeState,
   SetDetailsFieldsPayload,
+  UpdateSectionItemPayload,
 } from './types';
 import { uid } from '../../utils/helpers/generateId';
 import {
@@ -107,6 +109,17 @@ export default handleActions<IResumeState, any>(
       ...state,
       [payload.field]: state[payload.field].filter(
         (item) => item.id !== payload.id,
+      ),
+    }),
+    [`${updateSectionItem}`]: (
+      state,
+      { payload }: Action<UpdateSectionItemPayload<string>>,
+    ) => ({
+      ...state,
+      [payload.list]: state[payload.list].map((item) =>
+        item.id === payload.id
+          ? { ...item, [payload.field]: payload.value }
+          : item,
       ),
     }),
   },
