@@ -1,33 +1,49 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Grid, TextField } from '@mui/material';
 import { AccordionUi } from '../../../ui/accordion/accordion';
 import { SummaryAccordion } from '../../../ui/accordion/summary';
+import { ILink } from '../../../../utils/types/resume';
+import {
+  LinksFields,
+  UpdateSectionItemPayload,
+} from '../../../../redux/resume/types';
 
 interface ILinkItemProps {
-  id: string;
+  linkItem: ILink;
+  updateSectionItem: (payload: UpdateSectionItemPayload<LinksFields>) => void;
   handleDeleteItem: () => void;
 }
 
 export const LinkItem: React.FC<ILinkItemProps> = ({
-  id,
+  linkItem,
   handleDeleteItem,
+  updateSectionItem,
 }) => {
-  const [label, setLabel] = useState<string>('');
-  const [link, setLink] = useState<string>('');
+  const { id, title, link } = linkItem;
 
   const onLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLabel(e.target.value);
+    updateSectionItem({
+      id,
+      list: 'links',
+      field: 'title',
+      value: e.target.value,
+    });
   };
 
   const onLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLink(e.target.value);
+    updateSectionItem({
+      id,
+      list: 'links',
+      field: 'link',
+      value: e.target.value,
+    });
   };
 
   return (
     <AccordionUi
       handleDeleteItem={handleDeleteItem}
       id={id}
-      summary={<SummaryAccordion title={label} subtitle={link} />}
+      summary={<SummaryAccordion title={title} subtitle={link} />}
       details={
         <Grid container spacing={4}>
           <Grid item xs={6}>
@@ -35,7 +51,7 @@ export const LinkItem: React.FC<ILinkItemProps> = ({
               label="Label"
               variant="filled"
               fullWidth
-              value={label}
+              value={title}
               onChange={onLabelChange}
             />
           </Grid>

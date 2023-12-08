@@ -1,14 +1,18 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Box } from '@mui/material';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import PersonIcon from '@mui/icons-material/Person';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { ButtonUi } from '../button/button';
 import { FlexStartCenter } from '../boxes/FlexStartCenter';
 
-interface IImageInputProps {}
+interface IImageInputProps {
+  image: string;
+  setImage: (payload: string) => void;
+}
 
-export const ImageInput: React.FC<IImageInputProps> = ({}) => {
+export const ImageInput: React.FC<IImageInputProps> = ({ image, setImage }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [file, setFile] = useState<File | null>(null);
@@ -20,6 +24,7 @@ export const ImageInput: React.FC<IImageInputProps> = ({}) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
       setFile(e.target.files[0]);
+
       if (inputRef.current) {
         inputRef.current.files = null;
         inputRef.current.value = '';
@@ -29,7 +34,14 @@ export const ImageInput: React.FC<IImageInputProps> = ({}) => {
 
   const handleDeleteImg = () => {
     setFile(null);
+    setImage('');
   };
+
+  useEffect(() => {
+    if (file) {
+      setImage(URL.createObjectURL(file));
+    }
+  }, [file]);
 
   return (
     <Box>

@@ -1,39 +1,77 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
 import { AddMoreBtn } from '../../../ui/addMoreBtn/addMoreBtn';
-import { uid } from '../../../../helpers/generateId';
 import { BackgroundDescription } from '../BackgroundDescription/BackgroundDescription';
 import { SectionTitle } from '../../../ui/text/sectionTitle';
+import { ICourse } from '../../../../utils/types/resume';
+import {
+  AddSectionItemPayload,
+  CoursesFields,
+  DeleteSectionItemPayload,
+  UpdateSectionItemPayload,
+} from '../../../../redux/resume/types';
 
-type Course = { id: string };
+interface ICoursesProps {
+  courses: ICourse[];
+  addSectionItem: (payload: AddSectionItemPayload) => void;
+  deleteSectionItem: (payload: DeleteSectionItemPayload) => void;
+  updateSectionItem: (payload: UpdateSectionItemPayload<CoursesFields>) => void;
+}
 
-export const Courses: React.FC = () => {
-  const [coursesList, setCoursesList] = useState<Course[]>([]);
-
+export const Courses: React.FC<ICoursesProps> = ({
+  courses,
+  addSectionItem,
+  deleteSectionItem,
+  updateSectionItem,
+}) => {
   const handleAddItem = () => {
-    setCoursesList([...coursesList, { id: uid() }]);
+    addSectionItem({ field: 'courses' });
   };
 
   const handleDeleteItem = (id: string) => {
-    setCoursesList(coursesList.filter((item) => item.id !== id));
+    deleteSectionItem({ id, field: 'courses' });
+  };
+
+  const handleUpdateItem = (
+    id: string,
+    value: string,
+    field: CoursesFields,
+  ) => {
+    updateSectionItem({
+      id,
+      value,
+      field,
+      list: 'courses',
+    });
   };
 
   return (
     <Box mb={4}>
       <SectionTitle>Courses</SectionTitle>
-      {coursesList.map(({ id }) => (
+      {courses.map(({ id, course, institution }) => (
         <BackgroundDescription
           key={id}
           id={id}
           type="course"
           inputLabelOne="Course"
           inputLabelTwo="Institution"
+          inputOne={course}
+          inputTwo={institution}
           handleDeleteItem={() => handleDeleteItem(id)}
+          updateStartEndDate={(value: string) => {
+            handleUpdateItem(id, value, 'startEndDate');
+          }}
+          updateInputOne={(value: string) => {
+            handleUpdateItem(id, value, 'course');
+          }}
+          updateInputTwo={(value: string) => {
+            handleUpdateItem(id, value, 'institution');
+          }}
         />
       ))}
       <AddMoreBtn
         text="Course"
-        addFirst={!coursesList.length}
+        addFirst={!courses.length}
         onClick={handleAddItem}
       />
     </Box>

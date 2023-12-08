@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   Box,
   FormControlLabel,
@@ -10,16 +11,25 @@ import {
 import { AccordionUi } from '../../../ui/accordion/accordion';
 import { TextAreaUi } from '../../../ui/textarea/textarea';
 import { DatePickerUi } from '../../../ui/datePicker/datePicker';
-import { Colors } from '../../../../helpers/constants/colors';
+import { Colors } from '../../../../utils/constants/colors';
 import { SummaryAccordion } from '../../../ui/accordion/summary';
 import moment from 'moment';
 
 interface IBackgroundDescProps {
   id: string;
-  handleDeleteItem: () => void;
+  inputOne: string;
+  inputTwo: string;
   inputLabelOne: string;
   inputLabelTwo: string;
+  description?: string;
+  city?: string;
   type: 'workExpeprience' | 'education' | 'course';
+  handleDeleteItem: () => void;
+  updateDescription?: (value: string) => void;
+  updateStartEndDate: (value: string) => void;
+  updateCity?: (value: string) => void;
+  updateInputOne: (value: string) => void;
+  updateInputTwo: (value: string) => void;
 }
 
 const getSummary = (inpOne: string, inpTwo: string) => {
@@ -56,22 +66,33 @@ const getSummaryDate = (
 
 export const BackgroundDescription: React.FC<IBackgroundDescProps> = ({
   id,
+  inputOne,
+  inputTwo,
   inputLabelOne,
   inputLabelTwo,
   type,
+  city,
+  description,
   handleDeleteItem,
+  updateDescription,
+  updateStartEndDate,
+  updateCity,
+  updateInputOne,
+  updateInputTwo,
 }) => {
-  const [inputOne, setInputOne] = useState<string>('');
-  const [inputTwo, setInputTwo] = useState<string>('');
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [toPresent, setToPresent] = useState<boolean>(false);
 
   const onChangeInputOne = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputOne(e.target.value);
+    updateInputOne(e.target.value);
   };
   const onChangeInputTwo = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputTwo(e.target.value);
+    updateInputTwo(e.target.value);
+  };
+
+  const onChangeCity = (e: React.ChangeEvent<HTMLInputElement>) => {
+    updateCity?.(e.target.value);
   };
 
   const onChangeStartDate = (date: Date | null) => {
@@ -85,6 +106,14 @@ export const BackgroundDescription: React.FC<IBackgroundDescProps> = ({
     setToPresent(e.target.checked);
   };
 
+  const formattedDate = useMemo(() => {
+    return getSummaryDate(startDate, endDate, toPresent);
+  }, [startDate, endDate, toPresent]);
+
+  useEffect(() => {
+    updateStartEndDate(formattedDate);
+  }, [formattedDate]);
+
   return (
     <AccordionUi
       handleDeleteItem={handleDeleteItem}
@@ -92,7 +121,7 @@ export const BackgroundDescription: React.FC<IBackgroundDescProps> = ({
       summary={
         <SummaryAccordion
           title={getSummary(inputOne, inputTwo)}
-          subtitle={getSummaryDate(startDate, endDate, toPresent)}
+          subtitle={formattedDate}
         />
       }
       details={
@@ -123,6 +152,7 @@ export const BackgroundDescription: React.FC<IBackgroundDescProps> = ({
                       sx={{ background: Colors.grayBg }}
                       value={startDate}
                       onChange={onChangeStartDate}
+                      disableFuture
                     />
                     {type !== 'course' && (
                       <Box>
@@ -168,6 +198,8 @@ export const BackgroundDescription: React.FC<IBackgroundDescProps> = ({
                   variant="filled"
                   fullWidth
                   sx={{ mb: 2 }}
+                  value={city}
+                  onChange={onChangeCity}
                 />
               )}
             </Grid>
@@ -178,7 +210,10 @@ export const BackgroundDescription: React.FC<IBackgroundDescProps> = ({
                 Description
               </Typography>
               <Box sx={{ display: 'flex', justifyContent: 'stretch' }}>
-                <TextAreaUi />
+                <TextAreaUi
+                  value={description}
+                  onChange={(e) => updateDescription?.(e.target.value)}
+                />
               </Box>
             </>
           )}

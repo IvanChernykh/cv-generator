@@ -1,10 +1,16 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Grid, Slider, TextField, Typography } from '@mui/material';
 import { AccordionUi } from '../../../ui/accordion/accordion';
 import { SummaryAccordion } from '../../../ui/accordion/summary';
+import { ISkill } from '../../../../utils/types/resume';
+import {
+  SkillsFields,
+  UpdateSectionItemPayload,
+} from '../../../../redux/resume/types';
 
 interface ISkillItemProps {
-  id: string;
+  skill: ISkill;
+  updateSectionItem: (payload: UpdateSectionItemPayload<SkillsFields>) => void;
   handleDeleteItem: () => void;
 }
 
@@ -39,18 +45,28 @@ const getLevelColorAndName = (level: number): [string, string] => {
 };
 
 export const SkillItem: React.FC<ISkillItemProps> = ({
-  id,
+  skill,
   handleDeleteItem,
+  updateSectionItem,
 }) => {
-  const [level, setLevel] = useState<number>(20);
-  const [skillVal, setSkillVal] = useState<string>('');
+  const { id, title, level } = skill;
 
   const handleLevelChange = (e: any) => {
-    setLevel(e.target.value);
+    updateSectionItem({
+      id,
+      list: 'skills',
+      field: 'level',
+      value: e.target.value,
+    });
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSkillVal(e.target.value);
+    updateSectionItem({
+      id,
+      list: 'skills',
+      field: 'title',
+      value: e.target.value,
+    });
   };
 
   const [levelColor, levelName] = useMemo(() => {
@@ -62,7 +78,7 @@ export const SkillItem: React.FC<ISkillItemProps> = ({
       handleDeleteItem={handleDeleteItem}
       id={id}
       summary={
-        <SummaryAccordion showSubtitle title={skillVal} subtitle={levelName} />
+        <SummaryAccordion showSubtitle title={title} subtitle={levelName} />
       }
       details={
         <Grid container spacing={4}>
@@ -71,7 +87,7 @@ export const SkillItem: React.FC<ISkillItemProps> = ({
               label="Skill"
               variant="filled"
               fullWidth
-              value={skillVal}
+              value={title}
               onChange={handleInputChange}
             />
           </Grid>

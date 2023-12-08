@@ -6,7 +6,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { ButtonUi } from '../button/button';
-import { Colors } from '../../../helpers/constants/colors';
+import { Colors } from '../../../utils/constants/colors';
 
 interface IAccordionProps extends BoxProps {
   id: string;

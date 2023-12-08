@@ -1,36 +1,53 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
 import { AddMoreBtn } from '../../../ui/addMoreBtn/addMoreBtn';
-import { uid } from '../../../../helpers/generateId';
 import { SectionTitle } from '../../../ui/text/sectionTitle';
 import { LanguageItem } from './LanguageItem';
+import { ILanguage } from '../../../../utils/types/resume';
+import {
+  AddSectionItemPayload,
+  DeleteSectionItemPayload,
+  LanguagesFields,
+  UpdateSectionItemPayload,
+} from '../../../../redux/resume/types';
 
-type Language = { id: string };
+interface ILanguagesProps {
+  languages: ILanguage[];
+  updateSectionItem: (
+    payload: UpdateSectionItemPayload<LanguagesFields>,
+  ) => void;
+  addSectionItem: (payload: AddSectionItemPayload) => void;
+  deleteSectionItem: (payload: DeleteSectionItemPayload) => void;
+}
 
-export const Languages: React.FC = () => {
-  const [langList, setLangList] = useState<Language[]>([]);
-
+export const Languages: React.FC<ILanguagesProps> = ({
+  languages,
+  updateSectionItem,
+  addSectionItem,
+  deleteSectionItem,
+}) => {
   const handleAddItem = () => {
-    setLangList([...langList, { id: uid() }]);
+    addSectionItem({ field: 'languages' });
   };
 
   const handleDeleteItem = (id: string) => {
-    setLangList(langList.filter((item) => item.id !== id));
+    deleteSectionItem({ id, field: 'languages' });
   };
 
   return (
     <Box mb={4}>
       <SectionTitle>Languages</SectionTitle>
-      {langList.map(({ id }) => (
+      {languages.map((item) => (
         <LanguageItem
-          key={id}
-          id={id}
-          handleDeleteItem={() => handleDeleteItem(id)}
+          key={item.id}
+          language={item}
+          updateSectionItem={updateSectionItem}
+          handleDeleteItem={() => handleDeleteItem(item.id)}
         />
       ))}
       <AddMoreBtn
         text="language"
-        addFirst={!langList.length}
+        addFirst={!languages.length}
         onClick={handleAddItem}
       />
     </Box>

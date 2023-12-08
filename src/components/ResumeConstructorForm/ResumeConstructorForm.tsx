@@ -1,14 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from 'react';
 import { Container, SxProps, TextField, Typography } from '@mui/material';
-import React from 'react';
 import { FlexCenter } from '../ui/boxes/FlexCenter';
-import { PersonalDetails } from './components/PersonalDetails/PersonalDetails';
-import { Summary } from './components/Summary/Summary';
-import { WorkExperience } from './components/WorkExperience/WorkExperience';
-import { Links } from './components/Links/Links';
-import { Education } from './components/Education/Education';
-import { Languages } from './components/Languages/Languages';
-import { Courses } from './components/Courses/Courses';
-import { Skills } from './components/Skills/Skills';
+import PersonalDetails from './components/PersonalDetails';
+import Summary from './components/Summary';
+import WorkExperience from './components/WorkExperience';
+import Education from './components/Education';
+import Links from './components/Links';
+import Languages from './components/Languages';
+import Courses from './components/Courses';
+import Skills from './components/Skills';
+
+interface IResumeConstructorFormProps {
+  cvName: string;
+  setCvName: (payload: string) => void;
+}
 
 const containerStyles: SxProps = {
   paddingTop: '60px',
@@ -24,14 +30,31 @@ const containerStyles: SxProps = {
   },
 };
 
-export const ResumeConstructorForm: React.FC = () => {
+export const ResumeConstructorForm: React.FC<IResumeConstructorFormProps> = ({
+  cvName,
+  setCvName,
+}) => {
+  const [cvNameValue, setCvNameValue] = useState<string>(cvName);
+
+  const onBlurCvName = () => {
+    setCvName(cvNameValue);
+  };
+
+  useEffect(() => {
+    setCvName(cvName);
+  }, [cvName]);
+
   return (
     <Container sx={containerStyles}>
       <Typography variant="h5" textAlign="center" mb={2}>
         CV Name
       </Typography>
       <FlexCenter sx={{ mb: 8 }}>
-        <TextField value="Your CV" />
+        <TextField
+          value={cvNameValue}
+          onChange={(e) => setCvNameValue(e.target.value)}
+          onBlur={onBlurCvName}
+        />
       </FlexCenter>
       <PersonalDetails />
       <Summary />
