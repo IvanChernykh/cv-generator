@@ -14,6 +14,10 @@ interface IDetailsProps {
 export const Details: React.FC<IDetailsProps> = ({ details }) => {
   const { city, country, phone, email } = details;
 
+  if (![city, country, phone, email].filter(Boolean).length) {
+    return null;
+  }
+
   return (
     <SectionContainer>
       <RightSectionTitle>Details</RightSectionTitle>
