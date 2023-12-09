@@ -24,28 +24,30 @@ import {
   defaultCourseNoId,
   defaultEducationNoId,
 } from './constants';
+import { mockResume } from '../../utils/mock/mockData';
 
-const defaultState: IResumeState = {
-  id: '',
-  cvName: '',
-  details: {
-    jobTitle: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    linkedIn: '',
-    city: '',
-    photo: '',
-  },
-  summary: '',
-  workExpeprience: [],
-  education: [],
-  links: [],
-  skills: [],
-  languages: [],
-  courses: [],
-};
+const defaultState: IResumeState = mockResume;
+// {
+//   id: '',
+//   cvName: '',
+//   details: {
+//     jobTitle: '',
+//     firstName: '',
+//     lastName: '',
+//     email: '',
+//     phone: '',
+//     country: '',
+//     city: '',
+//     photo: '',
+//   },
+//   summary: '',
+//   workExpeprience: [],
+//   education: [],
+//   links: [],
+//   skills: [],
+//   languages: [],
+//   courses: [],
+// };
 
 export default handleActions<IResumeState, any>(
   {

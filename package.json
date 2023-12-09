@@ -8,6 +8,7 @@
     "@mui/icons-material": "true5.14.19",
     "@mui/material": "true5.14.20",
     "@mui/x-date-pickers": "true6.18.3",
+    "@react-pdf/renderer": "true3.1.14",
     "@reduxjs/toolkit": "true2.0.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",

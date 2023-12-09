@@ -60,12 +60,12 @@ export const PersonalDetails: React.FC<IPersonalDetailsProps> = ({
           />
           <TextField
             variant="filled"
-            label="LinkedIn"
+            label="Country"
             fullWidth
             sx={{ mb: 4 }}
-            value={details.linkedIn}
+            value={details.country}
             onChange={(e) => {
-              handleUpdateInput('linkedIn', e.target.value);
+              handleUpdateInput('country', e.target.value);
             }}
           />
         </Grid>

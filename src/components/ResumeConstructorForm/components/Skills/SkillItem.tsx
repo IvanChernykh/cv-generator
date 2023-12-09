@@ -27,17 +27,17 @@ const getLevelColorAndName = (level: number): [string, string] => {
   const [one, two, three, four, five, six] = Object.keys(LevelColors);
 
   switch (level) {
-    case 0:
+    case 16.5:
       return [LevelColors.Novice, one];
-    case 20:
+    case 33:
       return [LevelColors.Apprentice, two];
-    case 40:
+    case 49.5:
       return [LevelColors.Adept, three];
-    case 60:
+    case 66:
       return [LevelColors.Expert, four];
-    case 80:
+    case 83:
       return [LevelColors.Master, five];
-    case 100:
+    case 99:
       return [LevelColors.Legendary, six];
     default:
       return [LevelColors.Novice, one];
@@ -100,10 +100,10 @@ export const SkillItem: React.FC<ISkillItemProps> = ({
             </Typography>
             <Slider
               value={level}
-              step={20}
+              step={16.5}
               marks
-              min={0}
-              max={100}
+              min={16.5}
+              max={99}
               sx={{ transition: 'color .2s', color: levelColor }}
               onChange={(e) => handleLevelChange(e)}
             />
