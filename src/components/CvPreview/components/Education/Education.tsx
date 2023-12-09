@@ -24,10 +24,8 @@ export const Education: React.FC<IEducationProps> = ({ education }) => {
             <LeftItemTitle>
               {combineWordsWithComma(degree, school, city)}
             </LeftItemTitle>
-            {startEndDate && (
-              <LeftItemSubtitle>{startEndDate}</LeftItemSubtitle>
-            )}
-            {description && <ItemText>{description}</ItemText>}
+            <LeftItemSubtitle>{startEndDate}</LeftItemSubtitle>
+            <ItemText>{description}</ItemText>
           </LeftItemContainer>
         ),
       )}

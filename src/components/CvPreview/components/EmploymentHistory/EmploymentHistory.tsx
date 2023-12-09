@@ -27,10 +27,8 @@ export const EmploymentHistory: React.FC<IEmploymentHistoryProps> = ({
               {getItemTitle(jobTitle, employer)}
               {city && `, ${city}`}
             </LeftItemTitle>
-            {startEndDate && (
-              <LeftItemSubtitle>{startEndDate}</LeftItemSubtitle>
-            )}
-            {description && <ItemText>{description}</ItemText>}
+            <LeftItemSubtitle>{startEndDate}</LeftItemSubtitle>
+            <ItemText>{description}</ItemText>
           </LeftItemContainer>
         ),
       )}

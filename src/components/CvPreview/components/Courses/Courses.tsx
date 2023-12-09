@@ -22,7 +22,7 @@ export const Courses: React.FC<ICoursesProps> = ({ courses }) => {
           <LeftItemTitle>
             {combineWordsWithComma(course, institution)}
           </LeftItemTitle>
-          {startEndDate && <LeftItemSubtitle>{startEndDate}</LeftItemSubtitle>}
+          <LeftItemSubtitle>{startEndDate}</LeftItemSubtitle>
         </LeftItemContainer>
       ))}
     </SectionContainer>

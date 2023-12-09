@@ -35,7 +35,7 @@ const getLevelColorAndName = (level: number): [string, string] => {
       return [LevelColors.Adept, three];
     case 66:
       return [LevelColors.Expert, four];
-    case 83:
+    case 82.5:
       return [LevelColors.Master, five];
     case 99:
       return [LevelColors.Legendary, six];
