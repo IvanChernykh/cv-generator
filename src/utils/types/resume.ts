@@ -17,7 +17,7 @@ export interface IDetails {
   lastName: string;
   email: string;
   phone: string;
-  linkedIn: string;
+  country: string;
   city: string;
   photo: string;
 }

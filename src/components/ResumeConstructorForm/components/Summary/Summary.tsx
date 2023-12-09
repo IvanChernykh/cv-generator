@@ -11,7 +11,7 @@ interface ISummaryProps {
 }
 
 export const Summary: React.FC<ISummaryProps> = ({ summary, setSummary }) => {
-  const [val, setVal] = useState<string>('');
+  const [val, setVal] = useState<string>(summary);
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setVal(e.target.value);

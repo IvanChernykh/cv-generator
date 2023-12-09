@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   Box,
   FormControlLabel,
@@ -32,7 +32,7 @@ interface IBackgroundDescProps {
   updateInputTwo: (value: string) => void;
 }
 
-const getSummary = (inpOne: string, inpTwo: string) => {
+export const getItemTitle = (inpOne: string, inpTwo: string) => {
   if (inpOne && inpTwo) {
     return `${inpOne} at ${inpTwo}`;
   }
@@ -80,6 +80,8 @@ export const BackgroundDescription: React.FC<IBackgroundDescProps> = ({
   updateInputOne,
   updateInputTwo,
 }) => {
+  const userModifiedDateRef = useRef<boolean>(false);
+
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [toPresent, setToPresent] = useState<boolean>(false);
@@ -97,13 +99,16 @@ export const BackgroundDescription: React.FC<IBackgroundDescProps> = ({
 
   const onChangeStartDate = (date: Date | null) => {
     setStartDate(date);
+    userModifiedDateRef.current = true;
   };
   const onChangeEndDate = (date: Date | null) => {
     setEndDate(date);
+    userModifiedDateRef.current = true;
   };
 
   const handleToPresentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setToPresent(e.target.checked);
+    userModifiedDateRef.current = true;
   };
 
   const formattedDate = useMemo(() => {
@@ -111,7 +116,10 @@ export const BackgroundDescription: React.FC<IBackgroundDescProps> = ({
   }, [startDate, endDate, toPresent]);
 
   useEffect(() => {
-    updateStartEndDate(formattedDate);
+    if (userModifiedDateRef.current) {
+      updateStartEndDate(formattedDate);
+      userModifiedDateRef.current = false;
+    }
   }, [formattedDate]);
 
   return (
@@ -120,7 +128,7 @@ export const BackgroundDescription: React.FC<IBackgroundDescProps> = ({
       id={id}
       summary={
         <SummaryAccordion
-          title={getSummary(inputOne, inputTwo)}
+          title={getItemTitle(inputOne, inputTwo)}
           subtitle={formattedDate}
         />
       }
