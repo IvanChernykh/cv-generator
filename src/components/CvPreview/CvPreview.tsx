@@ -82,8 +82,6 @@ export const CvPreview: React.FC<ICvPreviewProps> = ({ resume }) => {
     setTimerId(newTimer);
   }, [resume]);
 
-  console.log(details);
-
   return (
     <Box sx={{ width: '100%', height: '100vh', position: 'relative' }}>
       <Box
