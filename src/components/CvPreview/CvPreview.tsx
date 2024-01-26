@@ -24,6 +24,7 @@ import { Details } from './components/Details/Details';
 import { Links } from './components/Links/Links';
 import { Skills } from './components/Skills/Skills';
 import { Languages } from './components/Languages/Languages';
+import { Projects } from './components/Projects/Projects';
 
 interface ICvPreviewProps {
   resume: IResumeState;
@@ -59,6 +60,7 @@ export const CvPreview: React.FC<ICvPreviewProps> = ({ resume }) => {
     details,
     summary,
     workExpeprience,
+    projects,
     education,
     links,
     skills,
@@ -120,6 +122,7 @@ export const CvPreview: React.FC<ICvPreviewProps> = ({ resume }) => {
                 {!!workExpeprience.length && (
                   <EmploymentHistory workExpeprience={workExpeprience} />
                 )}
+                {!!projects.length && <Projects projects={projects} />}
                 {!!education.length && <Education education={education} />}
                 {!!courses.length && <Courses courses={courses} />}
               </View>
