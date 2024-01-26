@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { BreakPoints } from '../../../utils/constants/breakPoints';
 
 export const Container = styled.div`
   width: 100%;
@@ -6,4 +7,9 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   overflow: hidden;
+
+  @media (max-width: ${BreakPoints.POINT_960}px) {
+    display: block;
+    position: relative;
+  }
 `;
