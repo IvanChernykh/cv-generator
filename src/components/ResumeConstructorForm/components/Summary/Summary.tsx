@@ -1,6 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+import React from 'react';
 import { Box } from '@mui/material';
-import React, { useState, useEffect } from 'react';
 import { TextAreaUi } from '../../../ui/textarea/textarea';
 import { SectionTitle } from '../../../ui/text/sectionTitle';
 import { SectionSubTitle } from '../../../ui/text/sectionSubTitle';
@@ -11,19 +10,9 @@ interface ISummaryProps {
 }
 
 export const Summary: React.FC<ISummaryProps> = ({ summary, setSummary }) => {
-  const [val, setVal] = useState<string>(summary);
-
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setVal(e.target.value);
+    setSummary(e.target.value);
   };
-
-  const onBlur = () => {
-    setSummary(val);
-  };
-
-  useEffect(() => {
-    setSummary(summary);
-  }, [summary]);
 
   return (
     <Box mb={4}>
@@ -33,7 +22,7 @@ export const Summary: React.FC<ISummaryProps> = ({ summary, setSummary }) => {
         your role, experience & most importantly - your biggest achievements,
         best qualities and skills.
       </SectionSubTitle>
-      <TextAreaUi value={val} onChange={onChange} onBlur={onBlur} />
+      <TextAreaUi value={summary} onChange={onChange} />
     </Box>
   );
 };

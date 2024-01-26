@@ -3,6 +3,7 @@ import {
   IEducation,
   ILanguage,
   ILink,
+  IProject,
   ISkill,
   IWorkExperience,
 } from '../../utils/types/resume';
@@ -39,4 +40,10 @@ export const defaultCourseNoId: Omit<ICourse, 'id'> = {
   course: '',
   institution: '',
   startEndDate: '',
+};
+
+export const defaultProjectNoId: Omit<IProject, 'id'> = {
+  title: '',
+  link: '',
+  description: '',
 };

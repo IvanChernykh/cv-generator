@@ -5,6 +5,7 @@ export interface IResume {
   summary: string;
   workExpeprience: IWorkExperience[];
   education: IEducation[];
+  projects: IProject[];
   links: ILink[];
   skills: ISkill[];
   languages: ILanguage[];
@@ -37,6 +38,13 @@ export interface IEducation {
   degree: string;
   city: string;
   startEndDate: string;
+  description: string;
+}
+
+export interface IProject {
+  id: string;
+  title: string;
+  link: string;
   description: string;
 }
 

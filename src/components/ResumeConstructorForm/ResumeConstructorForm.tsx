@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Container, SxProps, TextField, Typography } from '@mui/material';
 import { FlexCenter } from '../ui/boxes/FlexCenter';
 import PersonalDetails from './components/PersonalDetails';
@@ -10,6 +9,7 @@ import Links from './components/Links';
 import Languages from './components/Languages';
 import Courses from './components/Courses';
 import Skills from './components/Skills';
+import Projects from './components/Projects';
 
 interface IResumeConstructorFormProps {
   cvName: string;
@@ -34,15 +34,9 @@ export const ResumeConstructorForm: React.FC<IResumeConstructorFormProps> = ({
   cvName,
   setCvName,
 }) => {
-  const [cvNameValue, setCvNameValue] = useState<string>(cvName);
-
-  const onBlurCvName = () => {
-    setCvName(cvNameValue);
+  const onChangeCvName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCvName(e.target.value);
   };
-
-  useEffect(() => {
-    setCvName(cvName);
-  }, [cvName]);
 
   return (
     <Container sx={containerStyles}>
@@ -50,15 +44,12 @@ export const ResumeConstructorForm: React.FC<IResumeConstructorFormProps> = ({
         CV Name
       </Typography>
       <FlexCenter sx={{ mb: 8 }}>
-        <TextField
-          value={cvNameValue}
-          onChange={(e) => setCvNameValue(e.target.value)}
-          onBlur={onBlurCvName}
-        />
+        <TextField value={cvName} onChange={onChangeCvName} />
       </FlexCenter>
       <PersonalDetails />
       <Summary />
       <WorkExperience />
+      <Projects />
       <Education />
       <Links />
       <Skills />

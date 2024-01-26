@@ -4,6 +4,7 @@ import {
   IEducation,
   ILanguage,
   ILink,
+  IProject,
   IResume,
   ISkill,
   IWorkExperience,
@@ -31,6 +32,7 @@ export type DeleteSectionItemPayload = {
 };
 
 export type WorkExperienceFields = keyof Omit<IWorkExperience, 'id'>;
+export type ProjectsFields = keyof Omit<IProject, 'id'>;
 export type EducationFields = keyof Omit<IEducation, 'id'>;
 export type LinksFields = keyof Omit<ILink, 'id'>;
 export type SkillsFields = keyof Omit<ISkill, 'id'>;

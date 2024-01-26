@@ -35,6 +35,7 @@ export const mockResume: IResume = {
       startEndDate: 'Sep 1989 - May 2000',
     },
   ],
+  projects: [],
   links: [{ id: '123', title: 'GitHub', link: 'https://github.com/DeSanta' }],
   skills: [
     {

@@ -23,6 +23,7 @@ import {
   defaultLanguageNoId,
   defaultCourseNoId,
   defaultEducationNoId,
+  defaultProjectNoId,
 } from './constants';
 
 const defaultState: IResumeState = {
@@ -41,6 +42,7 @@ const defaultState: IResumeState = {
   summary: '',
   workExpeprience: [],
   education: [],
+  projects: [],
   links: [],
   skills: [],
   languages: [],
@@ -83,6 +85,9 @@ export default handleActions<IResumeState, any>(
           break;
         case 'education':
           newItem = { ...newItem, ...defaultEducationNoId };
+          break;
+        case 'projects':
+          newItem = { ...newItem, ...defaultProjectNoId };
           break;
         case 'links':
           newItem = { ...newItem, ...defaultLinkNoId };
