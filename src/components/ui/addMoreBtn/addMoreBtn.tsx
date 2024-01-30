@@ -18,8 +18,12 @@ export const AddMoreBtn: React.FC<IAddMoreBtnProps> = ({
     <ButtonUi
       {...props}
       startIcon={<AddIcon />}
-      fullWidth
-      sx={{ fontWeight: 700, justifyContent: 'start', ...sx }}
+      sx={{
+        fontWeight: 700,
+        justifyContent: 'start',
+        width: 'calc(100% - 41px)',
+        ...sx,
+      }}
     >
       {addFirst ? `Add ${text}` : `Add one more ${text}`}
     </ButtonUi>
