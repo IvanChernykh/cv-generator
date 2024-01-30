@@ -45,6 +45,7 @@ export interface IProject {
   id: string;
   title: string;
   link: string;
+  linkToRepo: string;
   description: string;
 }
 

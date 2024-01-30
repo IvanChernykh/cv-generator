@@ -9,6 +9,7 @@ interface IProjectItemProps {
   id: string;
   title: string;
   link: string;
+  linkToRepo: string;
   desc: string;
   handleDeleteItem: () => void;
   handleUpdateItem: (id: string, value: string, field: ProjectsFields) => void;
@@ -18,6 +19,7 @@ export const ProjectItem: React.FC<IProjectItemProps> = ({
   id,
   title,
   link,
+  linkToRepo,
   desc,
   handleDeleteItem,
   handleUpdateItem,
@@ -42,6 +44,14 @@ export const ProjectItem: React.FC<IProjectItemProps> = ({
                 sx={{ mb: 2 }}
                 value={title}
                 onChange={(e) => handleChange(e.target.value, 'title')}
+              />
+              <TextField
+                label="Repository Link"
+                variant="filled"
+                fullWidth
+                sx={{ mb: 2 }}
+                value={linkToRepo}
+                onChange={(e) => handleChange(e.target.value, 'linkToRepo')}
               />
             </Grid>
             <Grid item xs={6}>

@@ -52,13 +52,14 @@ export const Projects: React.FC<IProjectsProps> = ({
     <Box mb={4}>
       <SectionTitle>Projects</SectionTitle>
       <SectionSubTitle>Show your personal projects.</SectionSubTitle>
-      {projects.map(({ id, title, link, description }) => (
+      {projects.map(({ id, title, link, description, linkToRepo }) => (
         <ProjectItem
           key={id}
           id={id}
           handleDeleteItem={() => handleDeleteItem(id)}
           title={title}
           link={link}
+          linkToRepo={linkToRepo}
           desc={description}
           handleUpdateItem={handleUpdateItem}
         />

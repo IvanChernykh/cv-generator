@@ -45,5 +45,6 @@ export const defaultCourseNoId: Omit<ICourse, 'id'> = {
 export const defaultProjectNoId: Omit<IProject, 'id'> = {
   title: '',
   link: '',
+  linkToRepo: '',
   description: '',
 };

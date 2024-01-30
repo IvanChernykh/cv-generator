@@ -4,7 +4,6 @@ import ResumeConstructorForm from '../../ResumeConstructorForm';
 import CvPreview from '../../CvPreview';
 
 export const ConstructorPage: React.FC = () => {
-  // return <CvPreview />;
   return (
     <Container>
       <ResumeConstructorForm />
