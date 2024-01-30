@@ -10,6 +10,7 @@ import Languages from './components/Languages';
 import Courses from './components/Courses';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
+import TopPanel from './components/TopPanel';
 
 interface IResumeConstructorFormProps {
   cvName: string;
@@ -17,7 +18,6 @@ interface IResumeConstructorFormProps {
 }
 
 const containerStyles: SxProps = {
-  paddingTop: '60px',
   paddingBottom: '120px',
   paddingLeft: '48px !important',
   paddingRight: '48px !important',
@@ -40,6 +40,7 @@ export const ResumeConstructorForm: React.FC<IResumeConstructorFormProps> = ({
 
   return (
     <Container sx={containerStyles}>
+      <TopPanel />
       <Typography variant="h5" textAlign="center" mb={2}>
         CV Name
       </Typography>

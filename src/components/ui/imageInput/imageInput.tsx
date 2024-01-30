@@ -6,6 +6,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { ButtonUi } from '../button/button';
 import { FlexStartCenter } from '../boxes/FlexStartCenter';
+import { clearFileInputRef } from '../../../utils/helpers/clearFileInputRef';
 
 interface IImageInputProps {
   image: string;
@@ -25,10 +26,7 @@ export const ImageInput: React.FC<IImageInputProps> = ({ image, setImage }) => {
     if (e.target.files?.length) {
       setFile(e.target.files[0]);
 
-      if (inputRef.current) {
-        inputRef.current.files = null;
-        inputRef.current.value = '';
-      }
+      clearFileInputRef(inputRef);
     }
   };
 

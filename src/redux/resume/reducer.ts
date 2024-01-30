@@ -7,6 +7,7 @@ import {
   addSectionItem,
   deleteSectionItem,
   updateSectionItem,
+  updateResume,
 } from './actions';
 import {
   AddSectionItemPayload,
@@ -25,8 +26,9 @@ import {
   defaultEducationNoId,
   defaultProjectNoId,
 } from './constants';
+import { IResume } from '../../utils/types/resume';
 
-const defaultState: IResumeState = {
+export const defaultState: IResumeState = {
   id: '',
   cvName: '',
   details: {
@@ -127,7 +129,11 @@ export default handleActions<IResumeState, any>(
           : item,
       ),
     }),
+    [`${updateResume}`]: (state, { payload }: Action<IResume>) => ({
+      ...state,
+      ...payload,
+    }),
   },
-  defaultState,
+  { ...defaultState },
   {},
 );
