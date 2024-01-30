@@ -25,6 +25,7 @@ import { Links } from './components/Links/Links';
 import { Skills } from './components/Skills/Skills';
 import { Languages } from './components/Languages/Languages';
 import { Projects } from './components/Projects/Projects';
+import { base64ToBlob } from '../../utils/helpers/base64ToBlob';
 
 interface ICvPreviewProps {
   resume: IResumeState;
@@ -70,6 +71,7 @@ export const CvPreview: React.FC<ICvPreviewProps> = ({ resume }) => {
 
   const [isChanged, setIsChanged] = useState<boolean>(false);
   const [timerId, setTimerId] = useState<NodeJS.Timeout>();
+  const [photoUrl, setPhotoUrl] = useState<string | null>(null);
 
   useEffect(() => {
     setIsChanged(true);
@@ -83,6 +85,14 @@ export const CvPreview: React.FC<ICvPreviewProps> = ({ resume }) => {
     }, 600);
     setTimerId(newTimer);
   }, [resume]);
+
+  useEffect(() => {
+    if (details.photo) {
+      setPhotoUrl(URL.createObjectURL(base64ToBlob(details.photo)));
+    } else {
+      setPhotoUrl(null);
+    }
+  }, [details.photo]);
 
   return (
     <Box sx={{ width: '100%', height: '100vh', position: 'relative' }}>
@@ -115,7 +125,7 @@ export const CvPreview: React.FC<ICvPreviewProps> = ({ resume }) => {
       >
         <Document title={resume.cvName}>
           <Page style={styles.page}>
-            <Header details={details} />
+            <Header details={details} photoUrl={photoUrl} />
             <View style={styles.sectionsContainer}>
               <View style={styles.left}>
                 {summary && <SummarySection summary={summary} />}

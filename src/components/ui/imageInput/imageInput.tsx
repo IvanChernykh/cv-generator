@@ -7,6 +7,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { ButtonUi } from '../button/button';
 import { FlexStartCenter } from '../boxes/FlexStartCenter';
 import { clearFileInputRef } from '../../../utils/helpers/clearFileInputRef';
+import { base64ToBlob } from '../../../utils/helpers/base64ToBlob';
 
 interface IImageInputProps {
   image: string;
@@ -17,6 +18,7 @@ export const ImageInput: React.FC<IImageInputProps> = ({ image, setImage }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [file, setFile] = useState<File | null>(null);
+  const [imageBlob, setImageBlob] = useState<Blob | null>(null);
 
   const handleUploadClick = () => {
     inputRef.current?.click();
@@ -32,14 +34,29 @@ export const ImageInput: React.FC<IImageInputProps> = ({ image, setImage }) => {
 
   const handleDeleteImg = () => {
     setFile(null);
+    setImageBlob(null);
     setImage('');
   };
 
   useEffect(() => {
     if (file) {
-      setImage(URL.createObjectURL(file));
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = function () {
+        if (reader.result) {
+          const base64Data = (reader.result as string).split(',')[1];
+          setImage(base64Data);
+        }
+      };
     }
   }, [file]);
+
+  useEffect(() => {
+    if (image) {
+      const blob = base64ToBlob(image);
+      setImageBlob(blob);
+    }
+  }, [image]);
 
   return (
     <Box>
@@ -56,9 +73,9 @@ export const ImageInput: React.FC<IImageInputProps> = ({ image, setImage }) => {
           }}
           mr={2}
         >
-          {file ? (
+          {imageBlob ? (
             <img
-              src={URL.createObjectURL(file)}
+              src={URL.createObjectURL(imageBlob)}
               alt="img"
               width={56}
               height={56}
@@ -72,9 +89,9 @@ export const ImageInput: React.FC<IImageInputProps> = ({ image, setImage }) => {
           )}
         </Box>
         <ButtonUi onClick={handleUploadClick}>
-          {file ? 'Change ' : 'Upload '} photo
+          {imageBlob ? 'Change ' : 'Upload '} photo
         </ButtonUi>
-        {file && (
+        {imageBlob && (
           <ButtonUi
             onClick={handleDeleteImg}
             sx={{ ml: 2 }}

@@ -31,7 +31,7 @@ const checkCorrectKeysInSections = (key: string, iKey: string) => {
     iKey !== 'id'
   );
 };
-
+// TODO: check for photo as blob/base64
 export const isCorrectType = (obj: any): boolean => {
   let isValid = true;
 

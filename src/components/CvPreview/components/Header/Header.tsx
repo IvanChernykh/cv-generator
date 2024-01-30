@@ -5,6 +5,7 @@ import { Colors } from '../../../../utils/constants/colors';
 
 interface IHeaderProps {
   details: IDetails;
+  photoUrl: string | null;
 }
 
 const styles = StyleSheet.create({
@@ -33,10 +34,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export const Header: React.FC<IHeaderProps> = ({ details }) => {
+export const Header: React.FC<IHeaderProps> = ({ details, photoUrl }) => {
   return (
     <View style={styles.section}>
-      {details.photo && <Image src={details.photo} style={styles.image} />}
+      {photoUrl && <Image src={photoUrl} style={styles.image} />}
       <View style={styles.textBlock}>
         <Text style={styles.title}>
           {details.firstName} {details.lastName}

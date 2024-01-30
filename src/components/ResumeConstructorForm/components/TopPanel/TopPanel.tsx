@@ -34,12 +34,12 @@ export const TopPanel: React.FC<ITopPanelProps> = ({
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { target } = e;
-    if (!target.files) {
+    const { files } = e.target;
+    if (!files) {
       return;
     }
 
-    const selectedFile = target.files[0];
+    const selectedFile = files[0];
 
     const reader = new FileReader();
     reader.readAsText(selectedFile);
