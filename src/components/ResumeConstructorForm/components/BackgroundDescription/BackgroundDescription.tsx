@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import moment from 'moment';
 import {
   Box,
   FormControlLabel,
@@ -13,7 +14,6 @@ import { TextAreaUi } from '../../../ui/textarea/textarea';
 import { DatePickerUi } from '../../../ui/datePicker/datePicker';
 import { Colors } from '../../../../utils/constants/colors';
 import { SummaryAccordion } from '../../../ui/accordion/summary';
-import moment from 'moment';
 
 interface IBackgroundDescProps {
   id: string;
@@ -24,6 +24,7 @@ interface IBackgroundDescProps {
   description?: string;
   city?: string;
   type: 'workExpeprience' | 'education' | 'course';
+  startEndDate: string;
   handleDeleteItem: () => void;
   updateDescription?: (value: string) => void;
   updateStartEndDate: (value: string) => void;
@@ -64,6 +65,25 @@ const getSummaryDate = (
   return isEndDateValid ? formattedEndDate : '';
 };
 
+const convertDateString = (date: string | undefined) => {
+  return date && moment(date).isValid() ? moment(date, 'MMM, YYYY') : null;
+};
+
+const getValueFromFormattedDate = (
+  startEndDate: string,
+): [Date | null, Date | null, boolean] => {
+  const [formattedStart, formattedEnd] = startEndDate.split(' - ');
+
+  const toPresent = !!(
+    formattedStart?.includes('Present') || formattedEnd?.includes('Present')
+  );
+
+  const startDate = convertDateString(formattedStart);
+  const endDate = convertDateString(formattedEnd);
+
+  return [startDate as Date | null, endDate as Date | null, toPresent];
+};
+
 export const BackgroundDescription: React.FC<IBackgroundDescProps> = ({
   id,
   inputOne,
@@ -73,6 +93,7 @@ export const BackgroundDescription: React.FC<IBackgroundDescProps> = ({
   type,
   city,
   description,
+  startEndDate,
   handleDeleteItem,
   updateDescription,
   updateStartEndDate,
@@ -122,6 +143,16 @@ export const BackgroundDescription: React.FC<IBackgroundDescProps> = ({
     }
   }, [formattedDate]);
 
+  useEffect(() => {
+    if (startEndDate) {
+      const [start, end, present] = getValueFromFormattedDate(startEndDate);
+
+      setStartDate(start);
+      end && setEndDate(end);
+      present && setToPresent(true);
+    }
+  }, [startEndDate]);
+
   return (
     <AccordionUi
       handleDeleteItem={handleDeleteItem}
@@ -168,6 +199,7 @@ export const BackgroundDescription: React.FC<IBackgroundDescProps> = ({
                           control={
                             <Switch
                               value={toPresent}
+                              checked={toPresent}
                               onChange={handleToPresentChange}
                             />
                           }

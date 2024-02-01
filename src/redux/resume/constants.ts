@@ -28,7 +28,7 @@ export const defaultLinkNoId: Omit<ILink, 'id'> = { title: '', link: '' };
 
 export const defaultSkillNoId: Omit<ISkill, 'id'> = {
   title: '',
-  level: 20,
+  level: 33,
 };
 
 export const defaultLanguageNoId: Omit<ILanguage, 'id'> = {

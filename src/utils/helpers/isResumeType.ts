@@ -58,7 +58,7 @@ export const isCorrectType = (obj: any): boolean => {
           }
         });
       } else if (typeof val === 'object') {
-        Object.entries(([dKey, dVal]: [any, any]) => {
+        Object.entries(val).forEach(([dKey, dVal]: [any, any]) => {
           if (!detailsKeys.includes(dKey) || typeof dVal !== 'string') {
             isValid = false;
           }

@@ -52,35 +52,38 @@ export const Education: React.FC<IEducationProps> = ({
     <Box mb={4}>
       <SectionTitle>Education</SectionTitle>
       <SectionSubTitle>Describe your education.</SectionSubTitle>
-      {education.map(({ id, description, city, school, degree }) => (
-        <BackgroundDescription
-          key={id}
-          id={id}
-          type="education"
-          inputLabelOne="School"
-          inputLabelTwo="Degree"
-          inputOne={school}
-          inputTwo={degree}
-          description={description}
-          city={city}
-          handleDeleteItem={() => handleDeleteItem(id)}
-          updateStartEndDate={(value: string) => {
-            handleUpdateItem(id, value, 'startEndDate');
-          }}
-          updateDescription={(value: string) => {
-            handleUpdateItem(id, value, 'description');
-          }}
-          updateCity={(value: string) => {
-            handleUpdateItem(id, value, 'city');
-          }}
-          updateInputOne={(value: string) => {
-            handleUpdateItem(id, value, 'school');
-          }}
-          updateInputTwo={(value: string) => {
-            handleUpdateItem(id, value, 'degree');
-          }}
-        />
-      ))}
+      {education.map(
+        ({ id, description, city, school, degree, startEndDate }) => (
+          <BackgroundDescription
+            key={id}
+            id={id}
+            type="education"
+            inputLabelOne="School"
+            inputLabelTwo="Degree"
+            inputOne={school}
+            inputTwo={degree}
+            description={description}
+            city={city}
+            startEndDate={startEndDate}
+            handleDeleteItem={() => handleDeleteItem(id)}
+            updateStartEndDate={(value: string) => {
+              handleUpdateItem(id, value, 'startEndDate');
+            }}
+            updateDescription={(value: string) => {
+              handleUpdateItem(id, value, 'description');
+            }}
+            updateCity={(value: string) => {
+              handleUpdateItem(id, value, 'city');
+            }}
+            updateInputOne={(value: string) => {
+              handleUpdateItem(id, value, 'school');
+            }}
+            updateInputTwo={(value: string) => {
+              handleUpdateItem(id, value, 'degree');
+            }}
+          />
+        ),
+      )}
       <AddMoreBtn
         text="education"
         addFirst={!education.length}

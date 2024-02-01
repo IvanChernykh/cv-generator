@@ -54,35 +54,38 @@ export const WorkExperience: React.FC<IWorkExperienceProps> = ({
       <SectionSubTitle>
         Show your relevant experience (last 10 years).
       </SectionSubTitle>
-      {workExpeprience.map(({ id, description, city, jobTitle, employer }) => (
-        <BackgroundDescription
-          key={id}
-          id={id}
-          type="workExpeprience"
-          inputLabelOne="Job Title"
-          inputLabelTwo="Employer"
-          description={description}
-          city={city}
-          inputOne={jobTitle}
-          inputTwo={employer}
-          handleDeleteItem={() => handleDeleteItem(id)}
-          updateDescription={(value: string) => {
-            handleUpdateItem(id, value, 'description');
-          }}
-          updateStartEndDate={(value: string) => {
-            handleUpdateItem(id, value, 'startEndDate');
-          }}
-          updateCity={(value: string) => {
-            handleUpdateItem(id, value, 'city');
-          }}
-          updateInputOne={(value: string) => {
-            handleUpdateItem(id, value, 'jobTitle');
-          }}
-          updateInputTwo={(value: string) => {
-            handleUpdateItem(id, value, 'employer');
-          }}
-        />
-      ))}
+      {workExpeprience.map(
+        ({ id, description, city, jobTitle, employer, startEndDate }) => (
+          <BackgroundDescription
+            key={id}
+            id={id}
+            type="workExpeprience"
+            inputLabelOne="Job Title"
+            inputLabelTwo="Employer"
+            description={description}
+            city={city}
+            inputOne={jobTitle}
+            inputTwo={employer}
+            startEndDate={startEndDate}
+            handleDeleteItem={() => handleDeleteItem(id)}
+            updateDescription={(value: string) => {
+              handleUpdateItem(id, value, 'description');
+            }}
+            updateStartEndDate={(value: string) => {
+              handleUpdateItem(id, value, 'startEndDate');
+            }}
+            updateCity={(value: string) => {
+              handleUpdateItem(id, value, 'city');
+            }}
+            updateInputOne={(value: string) => {
+              handleUpdateItem(id, value, 'jobTitle');
+            }}
+            updateInputTwo={(value: string) => {
+              handleUpdateItem(id, value, 'employer');
+            }}
+          />
+        ),
+      )}
       <AddMoreBtn
         text="employment"
         addFirst={!workExpeprience.length}
