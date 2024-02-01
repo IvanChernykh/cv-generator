@@ -48,7 +48,7 @@ export const Courses: React.FC<ICoursesProps> = ({
   return (
     <Box mb={4}>
       <SectionTitle>Courses</SectionTitle>
-      {courses.map(({ id, course, institution }) => (
+      {courses.map(({ id, course, institution, startEndDate }) => (
         <BackgroundDescription
           key={id}
           id={id}
@@ -57,6 +57,7 @@ export const Courses: React.FC<ICoursesProps> = ({
           inputLabelTwo="Institution"
           inputOne={course}
           inputTwo={institution}
+          startEndDate={startEndDate}
           handleDeleteItem={() => handleDeleteItem(id)}
           updateStartEndDate={(value: string) => {
             handleUpdateItem(id, value, 'startEndDate');
