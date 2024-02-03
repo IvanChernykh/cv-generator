@@ -32,6 +32,7 @@ export const AccordionUi: React.FC<IAccordionProps> = ({
             opacity: 1,
           },
         },
+        width: '100%',
         ...sx,
       }}
       {...props}
