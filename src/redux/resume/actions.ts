@@ -8,6 +8,7 @@ export enum ResumeActions {
   ADD_SECTION_ITEM = 'ADD_SECTION_ITEM',
   DELETE_SECTION_ITEM = 'DELETE_SECTION_ITEM',
   UPDATE_SECTION_ITEM = 'UPDATE_SECTION_ITEM',
+  UPDATE_SECTION_LIST = 'UPDATE_SECTION_LIST',
   UPDATE_RESUME = 'UPDATE_RESUME',
 }
 
@@ -19,6 +20,7 @@ export const {
   addSectionItem,
   deleteSectionItem,
   updateSectionItem,
+  updateSectionList,
   updateResume,
 } = createActions(
   ResumeActions.SET_CV_NAME,
@@ -28,5 +30,6 @@ export const {
   ResumeActions.ADD_SECTION_ITEM,
   ResumeActions.DELETE_SECTION_ITEM,
   ResumeActions.UPDATE_SECTION_ITEM,
+  ResumeActions.UPDATE_SECTION_LIST,
   ResumeActions.UPDATE_RESUME,
 );

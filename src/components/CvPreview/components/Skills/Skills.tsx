@@ -14,9 +14,9 @@ export const Skills: React.FC<ISkillsProps> = ({ skills }) => {
   return (
     <SectionContainer>
       <RightSectionTitle>Skills</RightSectionTitle>
-      {skills.map(({ id, title, level }) => (
+      {skills.map(({ id, title, level }, idx) => (
         <RightItemWithLevel
-          key={id}
+          key={`${id}-${idx}`}
           title={title}
           levelInPercent={level === 99 ? 100 : level}
         />

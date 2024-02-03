@@ -21,6 +21,7 @@
     "dayjs": "true1.11.10",
     "moment": "true2.29.4",
     "react": "^18.2.0",
+    "react-beautiful-dnd": "true13.1.1",
     "react-dom": "^18.2.0",
     "react-redux": "true9.0.2",
     "react-router-dom": "true6.20.1",
@@ -54,6 +55,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-beautiful-dnd": "true13.1.8",
     "@types/redux-actions": "true2.6.5",
     "typescript": "*"
   },

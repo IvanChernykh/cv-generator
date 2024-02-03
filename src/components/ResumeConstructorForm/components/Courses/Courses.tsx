@@ -9,13 +9,17 @@ import {
   CoursesFields,
   DeleteSectionItemPayload,
   UpdateSectionItemPayload,
+  UpdateSectionListPayload,
 } from '../../../../redux/resume/types';
+import { DraggableCustom } from '../../../ui/dragAndDrop/DraggableCustom';
+import { DragDropWrapper } from '../../../ui/dragAndDrop/DragDropContextCustom';
 
 interface ICoursesProps {
   courses: ICourse[];
   addSectionItem: (payload: AddSectionItemPayload) => void;
   deleteSectionItem: (payload: DeleteSectionItemPayload) => void;
   updateSectionItem: (payload: UpdateSectionItemPayload<CoursesFields>) => void;
+  updateSectionList: (payload: UpdateSectionListPayload) => void;
 }
 
 export const Courses: React.FC<ICoursesProps> = ({
@@ -23,6 +27,7 @@ export const Courses: React.FC<ICoursesProps> = ({
   addSectionItem,
   deleteSectionItem,
   updateSectionItem,
+  updateSectionList,
 }) => {
   const handleAddItem = () => {
     addSectionItem({ field: 'courses' });
@@ -48,28 +53,36 @@ export const Courses: React.FC<ICoursesProps> = ({
   return (
     <Box mb={4}>
       <SectionTitle>Courses</SectionTitle>
-      {courses.map(({ id, course, institution, startEndDate }) => (
-        <BackgroundDescription
-          key={id}
-          id={id}
-          type="course"
-          inputLabelOne="Course"
-          inputLabelTwo="Institution"
-          inputOne={course}
-          inputTwo={institution}
-          startEndDate={startEndDate}
-          handleDeleteItem={() => handleDeleteItem(id)}
-          updateStartEndDate={(value: string) => {
-            handleUpdateItem(id, value, 'startEndDate');
-          }}
-          updateInputOne={(value: string) => {
-            handleUpdateItem(id, value, 'course');
-          }}
-          updateInputTwo={(value: string) => {
-            handleUpdateItem(id, value, 'institution');
-          }}
-        />
-      ))}
+      <DragDropWrapper
+        list={courses}
+        listName="courses"
+        droppableId="courses-dnd"
+        updateSectionList={updateSectionList}
+      >
+        {courses.map(({ id, course, institution, startEndDate }, idx) => (
+          <DraggableCustom key={id} draggableId={id} index={idx}>
+            <BackgroundDescription
+              id={id}
+              type="course"
+              inputLabelOne="Course"
+              inputLabelTwo="Institution"
+              inputOne={course}
+              inputTwo={institution}
+              startEndDate={startEndDate}
+              handleDeleteItem={() => handleDeleteItem(id)}
+              updateStartEndDate={(value: string) => {
+                handleUpdateItem(id, value, 'startEndDate');
+              }}
+              updateInputOne={(value: string) => {
+                handleUpdateItem(id, value, 'course');
+              }}
+              updateInputTwo={(value: string) => {
+                handleUpdateItem(id, value, 'institution');
+              }}
+            />
+          </DraggableCustom>
+        ))}
+      </DragDropWrapper>
       <AddMoreBtn
         text="Course"
         addFirst={!courses.length}

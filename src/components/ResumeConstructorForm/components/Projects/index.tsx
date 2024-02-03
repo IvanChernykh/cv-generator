@@ -6,11 +6,12 @@ import {
   addSectionItem,
   deleteSectionItem,
   updateSectionItem,
+  updateSectionList,
 } from '../../../../redux/resume/actions';
 
 export default connect(
   (state: StoreType) => ({
     projects: state.resume.projects,
   }),
-  { addSectionItem, deleteSectionItem, updateSectionItem },
+  { addSectionItem, deleteSectionItem, updateSectionItem, updateSectionList },
 )(Projects);

@@ -5,6 +5,7 @@ import {
   addSectionItem,
   deleteSectionItem,
   updateSectionItem,
+  updateSectionList,
 } from '../../../../redux/resume/actions';
 import { WorkExperience } from './WorkExperience';
 
@@ -16,5 +17,6 @@ export default connect(
     addSectionItem,
     deleteSectionItem,
     updateSectionItem,
+    updateSectionList,
   },
 )(WorkExperience);

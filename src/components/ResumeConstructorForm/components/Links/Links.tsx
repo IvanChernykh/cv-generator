@@ -9,13 +9,17 @@ import {
   DeleteSectionItemPayload,
   LinksFields,
   UpdateSectionItemPayload,
+  UpdateSectionListPayload,
 } from '../../../../redux/resume/types';
+import { DraggableCustom } from '../../../ui/dragAndDrop/DraggableCustom';
+import { DragDropWrapper } from '../../../ui/dragAndDrop/DragDropContextCustom';
 
 interface ILinksProps {
   links: ILink[];
   addSectionItem: (payload: AddSectionItemPayload) => void;
   deleteSectionItem: (payload: DeleteSectionItemPayload) => void;
   updateSectionItem: (payload: UpdateSectionItemPayload<LinksFields>) => void;
+  updateSectionList: (payload: UpdateSectionListPayload) => void;
 }
 
 export const Links: React.FC<ILinksProps> = ({
@@ -23,6 +27,7 @@ export const Links: React.FC<ILinksProps> = ({
   addSectionItem,
   deleteSectionItem,
   updateSectionItem,
+  updateSectionList,
 }) => {
   const handleAddItem = () => {
     addSectionItem({ field: 'links' });
@@ -35,14 +40,23 @@ export const Links: React.FC<ILinksProps> = ({
   return (
     <Box mb={4}>
       <SectionTitle>Social Links and websites</SectionTitle>
-      {links.map((item) => (
-        <LinkItem
-          key={item.id}
-          linkItem={item}
-          updateSectionItem={updateSectionItem}
-          handleDeleteItem={() => handleDeleteItem(item.id)}
-        />
-      ))}
+      <DragDropWrapper
+        list={links}
+        listName="links"
+        droppableId="links-dnd"
+        updateSectionList={updateSectionList}
+      >
+        {links.map((item, idx) => (
+          <DraggableCustom key={item.id} draggableId={item.id} index={idx}>
+            <LinkItem
+              linkItem={item}
+              updateSectionItem={updateSectionItem}
+              handleDeleteItem={() => handleDeleteItem(item.id)}
+            />
+          </DraggableCustom>
+        ))}
+      </DragDropWrapper>
+
       <AddMoreBtn
         text="link"
         addFirst={!links.length}

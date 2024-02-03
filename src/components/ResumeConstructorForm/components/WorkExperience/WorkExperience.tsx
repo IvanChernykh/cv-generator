@@ -9,8 +9,11 @@ import {
   AddSectionItemPayload,
   DeleteSectionItemPayload,
   UpdateSectionItemPayload,
+  UpdateSectionListPayload,
   WorkExperienceFields,
 } from '../../../../redux/resume/types';
+import { DragDropWrapper } from '../../../ui/dragAndDrop/DragDropContextCustom';
+import { DraggableCustom } from '../../../ui/dragAndDrop/DraggableCustom';
 
 interface IWorkExperienceProps {
   workExpeprience: IWorkExperience[];
@@ -19,6 +22,7 @@ interface IWorkExperienceProps {
   updateSectionItem: (
     payload: UpdateSectionItemPayload<WorkExperienceFields>,
   ) => void;
+  updateSectionList: (payload: UpdateSectionListPayload) => void;
 }
 
 export const WorkExperience: React.FC<IWorkExperienceProps> = ({
@@ -26,6 +30,7 @@ export const WorkExperience: React.FC<IWorkExperienceProps> = ({
   addSectionItem,
   deleteSectionItem,
   updateSectionItem,
+  updateSectionList,
 }) => {
   const handleAddItem = () => {
     addSectionItem({ field: 'workExpeprience' });
@@ -54,38 +59,50 @@ export const WorkExperience: React.FC<IWorkExperienceProps> = ({
       <SectionSubTitle>
         Show your relevant experience (last 10 years).
       </SectionSubTitle>
-      {workExpeprience.map(
-        ({ id, description, city, jobTitle, employer, startEndDate }) => (
-          <BackgroundDescription
-            key={id}
-            id={id}
-            type="workExpeprience"
-            inputLabelOne="Job Title"
-            inputLabelTwo="Employer"
-            description={description}
-            city={city}
-            inputOne={jobTitle}
-            inputTwo={employer}
-            startEndDate={startEndDate}
-            handleDeleteItem={() => handleDeleteItem(id)}
-            updateDescription={(value: string) => {
-              handleUpdateItem(id, value, 'description');
-            }}
-            updateStartEndDate={(value: string) => {
-              handleUpdateItem(id, value, 'startEndDate');
-            }}
-            updateCity={(value: string) => {
-              handleUpdateItem(id, value, 'city');
-            }}
-            updateInputOne={(value: string) => {
-              handleUpdateItem(id, value, 'jobTitle');
-            }}
-            updateInputTwo={(value: string) => {
-              handleUpdateItem(id, value, 'employer');
-            }}
-          />
-        ),
-      )}
+      <DragDropWrapper
+        list={workExpeprience}
+        listName="workExpeprience"
+        droppableId="workExpeprience-dnd"
+        updateSectionList={updateSectionList}
+      >
+        {workExpeprience.map(
+          (
+            { id, description, city, jobTitle, employer, startEndDate },
+            idx,
+          ) => (
+            <DraggableCustom key={id} draggableId={id} index={idx}>
+              <BackgroundDescription
+                id={id}
+                type="workExpeprience"
+                inputLabelOne="Job Title"
+                inputLabelTwo="Employer"
+                description={description}
+                city={city}
+                inputOne={jobTitle}
+                inputTwo={employer}
+                startEndDate={startEndDate}
+                handleDeleteItem={() => handleDeleteItem(id)}
+                updateDescription={(value: string) => {
+                  handleUpdateItem(id, value, 'description');
+                }}
+                updateStartEndDate={(value: string) => {
+                  handleUpdateItem(id, value, 'startEndDate');
+                }}
+                updateCity={(value: string) => {
+                  handleUpdateItem(id, value, 'city');
+                }}
+                updateInputOne={(value: string) => {
+                  handleUpdateItem(id, value, 'jobTitle');
+                }}
+                updateInputTwo={(value: string) => {
+                  handleUpdateItem(id, value, 'employer');
+                }}
+              />
+            </DraggableCustom>
+          ),
+        )}
+      </DragDropWrapper>
+
       <AddMoreBtn
         text="employment"
         addFirst={!workExpeprience.length}

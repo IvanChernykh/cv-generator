@@ -19,8 +19,8 @@ export const Education: React.FC<IEducationProps> = ({ education }) => {
     <SectionContainer>
       <LeftSectionTitle>Education</LeftSectionTitle>
       {education.map(
-        ({ id, school, degree, city, startEndDate, description }) => (
-          <LeftItemContainer key={id}>
+        ({ id, school, degree, city, startEndDate, description }, idx) => (
+          <LeftItemContainer key={`${id}-${idx}`}>
             <LeftItemTitle>
               {combineWordsWithComma(degree, school, city)}
             </LeftItemTitle>

@@ -21,8 +21,8 @@ export const EmploymentHistory: React.FC<IEmploymentHistoryProps> = ({
     <SectionContainer>
       <LeftSectionTitle>Employment History</LeftSectionTitle>
       {workExpeprience.map(
-        ({ id, jobTitle, employer, city, startEndDate, description }) => (
-          <LeftItemContainer key={id}>
+        ({ id, jobTitle, employer, city, startEndDate, description }, idx) => (
+          <LeftItemContainer key={`${id}-${idx}`}>
             <LeftItemTitle>
               {getItemTitle(jobTitle, employer)}
               {city && `, ${city}`}

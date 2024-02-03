@@ -9,8 +9,11 @@ import {
   DeleteSectionItemPayload,
   ProjectsFields,
   UpdateSectionItemPayload,
+  UpdateSectionListPayload,
 } from '../../../../redux/resume/types';
 import { ProjectItem } from './ProjectItem';
+import { DragDropWrapper } from '../../../ui/dragAndDrop/DragDropContextCustom';
+import { DraggableCustom } from '../../../ui/dragAndDrop/DraggableCustom';
 
 interface IProjectsProps {
   projects: IProject[];
@@ -19,6 +22,7 @@ interface IProjectsProps {
   updateSectionItem: (
     payload: UpdateSectionItemPayload<ProjectsFields>,
   ) => void;
+  updateSectionList: (payload: UpdateSectionListPayload) => void;
 }
 
 export const Projects: React.FC<IProjectsProps> = ({
@@ -26,6 +30,7 @@ export const Projects: React.FC<IProjectsProps> = ({
   addSectionItem,
   deleteSectionItem,
   updateSectionItem,
+  updateSectionList,
 }) => {
   const handleAddItem = () => {
     addSectionItem({ field: 'projects' });
@@ -52,18 +57,27 @@ export const Projects: React.FC<IProjectsProps> = ({
     <Box mb={4}>
       <SectionTitle>Projects</SectionTitle>
       <SectionSubTitle>Show your personal projects.</SectionSubTitle>
-      {projects.map(({ id, title, link, description, linkToRepo }) => (
-        <ProjectItem
-          key={id}
-          id={id}
-          handleDeleteItem={() => handleDeleteItem(id)}
-          title={title}
-          link={link}
-          linkToRepo={linkToRepo}
-          desc={description}
-          handleUpdateItem={handleUpdateItem}
-        />
-      ))}
+      <DragDropWrapper
+        list={projects}
+        listName="projects"
+        droppableId="projects-dnd"
+        updateSectionList={updateSectionList}
+      >
+        {projects.map(({ id, title, link, description, linkToRepo }, idx) => (
+          <DraggableCustom key={id} draggableId={id} index={idx}>
+            <ProjectItem
+              id={id}
+              handleDeleteItem={() => handleDeleteItem(id)}
+              title={title}
+              link={link}
+              linkToRepo={linkToRepo}
+              desc={description}
+              handleUpdateItem={handleUpdateItem}
+            />
+          </DraggableCustom>
+        ))}
+      </DragDropWrapper>
+
       <AddMoreBtn
         text="project"
         addFirst={!projects.length}

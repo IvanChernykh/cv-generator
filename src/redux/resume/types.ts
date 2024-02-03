@@ -12,7 +12,7 @@ import {
 
 export interface IResumeState extends IResume {}
 
-type SectionsWithLists = keyof Omit<
+export type SectionsWithLists = keyof Omit<
   IResume,
   'summary' | 'details' | 'cvName' | 'id'
 >;
@@ -44,4 +44,9 @@ export type UpdateSectionItemPayload<T> = {
   list: SectionsWithLists;
   field: T;
   value: string | number;
+};
+
+export type UpdateSectionListPayload = {
+  listName: SectionsWithLists;
+  value: IResume[SectionsWithLists];
 };

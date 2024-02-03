@@ -9,13 +9,17 @@ import {
   DeleteSectionItemPayload,
   SkillsFields,
   UpdateSectionItemPayload,
+  UpdateSectionListPayload,
 } from '../../../../redux/resume/types';
+import { DraggableCustom } from '../../../ui/dragAndDrop/DraggableCustom';
+import { DragDropWrapper } from '../../../ui/dragAndDrop/DragDropContextCustom';
 
 interface ISkillsProps {
   skills: ISkill[];
   addSectionItem: (payload: AddSectionItemPayload) => void;
   deleteSectionItem: (payload: DeleteSectionItemPayload) => void;
   updateSectionItem: (payload: UpdateSectionItemPayload<SkillsFields>) => void;
+  updateSectionList: (payload: UpdateSectionListPayload) => void;
 }
 
 export const Skills: React.FC<ISkillsProps> = ({
@@ -23,6 +27,7 @@ export const Skills: React.FC<ISkillsProps> = ({
   addSectionItem,
   deleteSectionItem,
   updateSectionItem,
+  updateSectionList,
 }) => {
   const handleAddItem = () => {
     addSectionItem({ field: 'skills' });
@@ -35,14 +40,23 @@ export const Skills: React.FC<ISkillsProps> = ({
   return (
     <Box mb={4}>
       <SectionTitle>Skills</SectionTitle>
-      {skills.map((item) => (
-        <SkillItem
-          key={item.id}
-          skill={item}
-          updateSectionItem={updateSectionItem}
-          handleDeleteItem={() => handleDeleteItem(item.id)}
-        />
-      ))}
+      <DragDropWrapper
+        list={skills}
+        listName="skills"
+        droppableId="skills-dnd"
+        updateSectionList={updateSectionList}
+      >
+        {skills.map((item, idx) => (
+          <DraggableCustom key={item.id} draggableId={item.id} index={idx}>
+            <SkillItem
+              skill={item}
+              updateSectionItem={updateSectionItem}
+              handleDeleteItem={() => handleDeleteItem(item.id)}
+            />
+          </DraggableCustom>
+        ))}
+      </DragDropWrapper>
+
       <AddMoreBtn
         text="Skill"
         addFirst={!skills.length}

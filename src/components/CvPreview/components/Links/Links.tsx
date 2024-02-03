@@ -14,8 +14,8 @@ export const Links: React.FC<ILinksProps> = ({ links }) => {
   return (
     <SectionContainer>
       <RightSectionTitle>Links</RightSectionTitle>
-      {links.map(({ id, title, link }) => (
-        <LinkCustom key={id} src={link}>
+      {links.map(({ id, title, link }, idx) => (
+        <LinkCustom key={`${id}-${idx}`} src={link}>
           {title}
         </LinkCustom>
       ))}

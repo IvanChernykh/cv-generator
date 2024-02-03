@@ -33,13 +33,15 @@ export const Languages: React.FC<ILanguagesProps> = ({ languages }) => {
   return (
     <SectionContainer>
       <RightSectionTitle>Languages</RightSectionTitle>
-      {languages.map(({ id, title, level }) => (
-        <RightItemWithLevel
-          key={id}
-          title={title}
-          levelInPercent={getLevelInPercent(level)}
-        />
-      ))}
+      {languages.map(({ id, title, level }, idx) => {
+        return (
+          <RightItemWithLevel
+            key={`${id}-${idx}`}
+            title={title}
+            levelInPercent={getLevelInPercent(level)}
+          />
+        );
+      })}
     </SectionContainer>
   );
 };

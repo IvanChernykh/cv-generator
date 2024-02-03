@@ -7,6 +7,7 @@ import {
   addSectionItem,
   deleteSectionItem,
   updateSectionItem,
+  updateSectionList,
   updateResume,
 } from './actions';
 import {
@@ -14,6 +15,7 @@ import {
   DeleteSectionItemPayload,
   IResumeState,
   SetDetailsFieldsPayload,
+  UpdateSectionListPayload,
   UpdateSectionItemPayload,
 } from './types';
 import { uid } from '../../utils/helpers/generateId';
@@ -128,6 +130,13 @@ export default handleActions<IResumeState, any>(
           ? { ...item, [payload.field]: payload.value }
           : item,
       ),
+    }),
+    [`${updateSectionList}`]: (
+      state,
+      { payload }: Action<UpdateSectionListPayload>,
+    ) => ({
+      ...state,
+      [payload.listName]: [...payload.value],
     }),
     [`${updateResume}`]: (state, { payload }: Action<IResume>) => ({
       ...state,

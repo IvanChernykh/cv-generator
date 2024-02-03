@@ -25,7 +25,6 @@ export const AccordionUi: React.FC<IAccordionProps> = ({
 }) => {
   return (
     <Box
-      mb={2}
       sx={{
         display: 'flex',
         '&:hover': {

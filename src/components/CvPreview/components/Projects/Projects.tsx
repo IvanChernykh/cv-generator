@@ -18,8 +18,8 @@ export const Projects: React.FC<IEmploymentHistoryProps> = ({ projects }) => {
   return (
     <SectionContainer>
       <LeftSectionTitle>Projects</LeftSectionTitle>
-      {projects.map(({ id, title, link, description, linkToRepo }) => (
-        <LeftItemContainer key={id}>
+      {projects.map(({ id, title, link, description, linkToRepo }, idx) => (
+        <LeftItemContainer key={`${id}-${idx}`}>
           <LeftItemTitle>{title}</LeftItemTitle>
           <View
             style={{ display: 'flex', flexDirection: 'row', marginBottom: 5 }}
