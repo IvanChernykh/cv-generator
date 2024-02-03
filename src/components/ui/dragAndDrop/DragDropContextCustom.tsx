@@ -26,7 +26,7 @@ export const DragDropWrapper: React.FC<IDragDropContextCustomProps> = ({
     const source = result.source.index;
     const target = result.destination?.index;
 
-    if (target) {
+    if (target !== undefined) {
       updateSectionList({
         listName,
         value: moveItem<(typeof list)[0]>(
