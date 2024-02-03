@@ -1,12 +1,12 @@
 import React from 'react';
-import { DragDropContext } from 'react-beautiful-dnd';
-import { handleDragEndSectionItem } from '../../../utils/helpers/dragAndDrop';
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import {
   SectionsWithLists,
   UpdateSectionListPayload,
 } from '../../../redux/resume/types';
 import { IResume } from '../../../utils/types/resume';
 import { DroppableCustom } from './DroppableCustom';
+import { moveItem } from '../../../utils/helpers/array';
 
 interface IDragDropContextCustomProps extends React.PropsWithChildren {
   droppableId: string;
@@ -22,12 +22,24 @@ export const DragDropWrapper: React.FC<IDragDropContextCustomProps> = ({
   droppableId,
   updateSectionList,
 }) => {
+  const handleDragEnd = (result: DropResult) => {
+    const source = result.source.index;
+    const target = result.destination?.index;
+
+    if (target) {
+      updateSectionList({
+        listName,
+        value: moveItem<(typeof list)[0]>(
+          list,
+          source,
+          target,
+        ) as IResume[SectionsWithLists],
+      });
+    }
+  };
+
   return (
-    <DragDropContext
-      onDragEnd={(result) =>
-        handleDragEndSectionItem(result, listName, list, updateSectionList)
-      }
-    >
+    <DragDropContext onDragEnd={handleDragEnd}>
       <DroppableCustom droppableId={droppableId}>{children}</DroppableCustom>
     </DragDropContext>
   );
