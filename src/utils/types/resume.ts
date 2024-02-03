@@ -58,7 +58,7 @@ export interface ILink {
 export interface ISkill {
   id: string;
   title: string;
-  level: number; // 0 | 20 | 40 | 60 | 80 | 100
+  level: number;
 }
 
 export interface ILanguage {
