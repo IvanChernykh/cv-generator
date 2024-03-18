@@ -47,17 +47,14 @@ export const TextEditor: React.FC<ITextEditorProps> = ({
         onChange={(v, __, ___, editor) => {
           const newDelta: DeltaOperation[] = editor
             .getContents()
-            .map(({ insert, attributes }) => {
-              console.log({ attributes });
-              return {
-                insert: insert,
-                attributes: {
-                  bold: !!attributes?.bold,
-                  italic: !!attributes?.italic,
-                  list: attributes?.list,
-                },
-              };
-            });
+            .map(({ insert, attributes }) => ({
+              insert: insert,
+              attributes: {
+                bold: !!attributes?.bold,
+                italic: !!attributes?.italic,
+                list: attributes?.list,
+              },
+            }));
 
           onChangeDelta?.(JSON.stringify(newDelta));
           onChange?.(v);

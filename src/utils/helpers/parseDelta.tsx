@@ -18,19 +18,12 @@ export const deltaToJsx = (delta: string) => {
   }
 
   return (
-    <View
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignItems: 'flex-start',
-      }}
-    >
+    <View>
       {parsed.map(({ insert }, idx, arr) => {
         const nextItem = arr[idx + 1];
         const withBullet = showBullet(nextItem);
 
-        return (
+        return insert?.trim().length ? (
           <View key={idx} style={{ position: 'relative' }}>
             <View>
               <Text style={{ fontSize: 11 }}>
@@ -53,7 +46,7 @@ export const deltaToJsx = (delta: string) => {
               </Text>
             </View>
           </View>
-        );
+        ) : null;
       })}
     </View>
   );
