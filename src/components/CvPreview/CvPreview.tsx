@@ -26,6 +26,8 @@ import { Skills } from './components/Skills/Skills';
 import { Languages } from './components/Languages/Languages';
 import { Projects } from './components/Projects/Projects';
 import { base64ToBlob } from '../../utils/helpers/base64ToBlob';
+import { deltaToJsx } from '../../utils/helpers/parseDelta';
+import { isEmpty } from '../ui/textEditor/textEditor';
 
 interface ICvPreviewProps {
   resume: IResumeState;
@@ -60,6 +62,7 @@ export const CvPreview: React.FC<ICvPreviewProps> = ({ resume }) => {
   const {
     details,
     summary,
+    summaryDelta,
     workExpeprience,
     projects,
     education,
@@ -93,6 +96,8 @@ export const CvPreview: React.FC<ICvPreviewProps> = ({ resume }) => {
       setPhotoUrl(null);
     }
   }, [details.photo]);
+
+  const parsedSummary = deltaToJsx(summaryDelta);
 
   return (
     <Box sx={{ width: '100%', height: '100vh', position: 'relative' }}>
@@ -128,7 +133,9 @@ export const CvPreview: React.FC<ICvPreviewProps> = ({ resume }) => {
             <Header details={details} photoUrl={photoUrl} />
             <View style={styles.sectionsContainer}>
               <View style={styles.left}>
-                {summary && <SummarySection summary={summary} />}
+                {!isEmpty(summary) && (
+                  <SummarySection summary={parsedSummary} />
+                )}
                 {!!workExpeprience.length && (
                   <EmploymentHistory workExpeprience={workExpeprience} />
                 )}

@@ -30,6 +30,7 @@ export interface IWorkExperience {
   city: string;
   startEndDate: string;
   description: string;
+  descriptionDelta: string;
 }
 
 export interface IEducation {
@@ -39,6 +40,7 @@ export interface IEducation {
   city: string;
   startEndDate: string;
   description: string;
+  descriptionDelta: string;
 }
 
 export interface IProject {
@@ -47,6 +49,7 @@ export interface IProject {
   link: string;
   linkToRepo: string;
   description: string;
+  descriptionDelta: string;
 }
 
 export interface ILink {
