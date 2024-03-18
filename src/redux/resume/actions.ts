@@ -3,6 +3,7 @@ import { createActions } from 'redux-actions';
 export enum ResumeActions {
   SET_CV_NAME = 'SET_CV_NAME',
   SET_SUMMARY = 'SET_SUMMARY',
+  SET_SUMMARY_DELTA = 'SET_SUMMARY_DELTA',
   SET_DETAILS_FIELDS = 'SET_DETAILS_FIELDS',
   SET_DETAILS_PHOTO = 'SET_DETAILS_PHOTO',
   ADD_SECTION_ITEM = 'ADD_SECTION_ITEM',
@@ -15,6 +16,7 @@ export enum ResumeActions {
 export const {
   setCvName,
   setSummary,
+  setSummaryDelta,
   setDetailsFields,
   setDetailsPhoto,
   addSectionItem,
@@ -25,6 +27,7 @@ export const {
 } = createActions(
   ResumeActions.SET_CV_NAME,
   ResumeActions.SET_SUMMARY,
+  ResumeActions.SET_SUMMARY_DELTA,
   ResumeActions.SET_DETAILS_FIELDS,
   ResumeActions.SET_DETAILS_PHOTO,
   ResumeActions.ADD_SECTION_ITEM,

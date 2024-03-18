@@ -10,7 +10,9 @@ import {
   IWorkExperience,
 } from '../../utils/types/resume';
 
-export interface IResumeState extends IResume {}
+export interface IResumeState extends IResume {
+  summaryDelta: string;
+}
 
 export type SectionsWithLists = keyof Omit<
   IResume,

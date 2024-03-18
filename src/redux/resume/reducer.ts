@@ -9,6 +9,7 @@ import {
   updateSectionItem,
   updateSectionList,
   updateResume,
+  setSummaryDelta,
 } from './actions';
 import {
   AddSectionItemPayload,
@@ -44,6 +45,7 @@ export const defaultState: IResumeState = {
     photo: '',
   },
   summary: '',
+  summaryDelta: '',
   workExpeprience: [],
   education: [],
   projects: [],
@@ -62,6 +64,10 @@ export default handleActions<IResumeState, any>(
     [`${setSummary}`]: (state, { payload }: Action<string>) => ({
       ...state,
       summary: payload,
+    }),
+    [`${setSummaryDelta}`]: (state, { payload }: Action<string>) => ({
+      ...state,
+      summaryDelta: payload,
     }),
     [`${setDetailsFields}`]: (
       state,

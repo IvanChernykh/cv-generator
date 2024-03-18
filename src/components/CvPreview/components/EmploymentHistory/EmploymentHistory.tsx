@@ -1,7 +1,6 @@
 import React from 'react';
 import { IWorkExperience } from '../../../../utils/types/resume';
 import {
-  ItemText,
   LeftItemContainer,
   LeftItemSubtitle,
   LeftItemTitle,
@@ -9,6 +8,7 @@ import {
   LeftSectionTitle,
 } from '../../../ui/pdf/pdf';
 import { getItemTitle } from '../../../ResumeConstructorForm/components/BackgroundDescription/BackgroundDescription';
+import { deltaToJsx } from '../../../../utils/helpers/parseDelta';
 
 interface IEmploymentHistoryProps {
   workExpeprience: IWorkExperience[];
@@ -21,14 +21,17 @@ export const EmploymentHistory: React.FC<IEmploymentHistoryProps> = ({
     <SectionContainer>
       <LeftSectionTitle>Employment History</LeftSectionTitle>
       {workExpeprience.map(
-        ({ id, jobTitle, employer, city, startEndDate, description }, idx) => (
+        (
+          { id, jobTitle, employer, city, startEndDate, descriptionDelta },
+          idx,
+        ) => (
           <LeftItemContainer key={`${id}-${idx}`}>
             <LeftItemTitle>
               {getItemTitle(jobTitle, employer)}
               {city && `, ${city}`}
             </LeftItemTitle>
             <LeftItemSubtitle>{startEndDate}</LeftItemSubtitle>
-            <ItemText>{description}</ItemText>
+            {deltaToJsx(descriptionDelta)}
           </LeftItemContainer>
         ),
       )}

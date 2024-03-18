@@ -14,6 +14,7 @@ export const defaultWorkExperienceNoId: Omit<IWorkExperience, 'id'> = {
   city: '',
   startEndDate: '',
   description: '',
+  descriptionDelta: '',
 };
 
 export const defaultEducationNoId: Omit<IEducation, 'id'> = {
@@ -22,6 +23,7 @@ export const defaultEducationNoId: Omit<IEducation, 'id'> = {
   city: '',
   startEndDate: '',
   description: '',
+  descriptionDelta: '',
 };
 
 export const defaultLinkNoId: Omit<ILink, 'id'> = { title: '', link: '' };
@@ -47,4 +49,5 @@ export const defaultProjectNoId: Omit<IProject, 'id'> = {
   link: '',
   linkToRepo: '',
   description: '',
+  descriptionDelta: '',
 };

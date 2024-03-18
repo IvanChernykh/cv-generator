@@ -85,6 +85,9 @@ export const WorkExperience: React.FC<IWorkExperienceProps> = ({
                 updateDescription={(value: string) => {
                   handleUpdateItem(id, value, 'description');
                 }}
+                updateDescriptionDelta={(value: string) => {
+                  handleUpdateItem(id, value, 'descriptionDelta');
+                }}
                 updateStartEndDate={(value: string) => {
                   handleUpdateItem(id, value, 'startEndDate');
                 }}

@@ -14,6 +14,7 @@ import { TextAreaUi } from '../../../ui/textarea/textarea';
 import { DatePickerUi } from '../../../ui/datePicker/datePicker';
 import { Colors } from '../../../../utils/constants/colors';
 import { SummaryAccordion } from '../../../ui/accordion/summary';
+import { TextEditor } from '../../../ui/textEditor/textEditor';
 
 interface IBackgroundDescProps {
   id: string;
@@ -27,6 +28,7 @@ interface IBackgroundDescProps {
   startEndDate: string;
   handleDeleteItem: () => void;
   updateDescription?: (value: string) => void;
+  updateDescriptionDelta?: (value: string) => void;
   updateStartEndDate: (value: string) => void;
   updateCity?: (value: string) => void;
   updateInputOne: (value: string) => void;
@@ -96,6 +98,7 @@ export const BackgroundDescription: React.FC<IBackgroundDescProps> = ({
   startEndDate,
   handleDeleteItem,
   updateDescription,
+  updateDescriptionDelta,
   updateStartEndDate,
   updateCity,
   updateInputOne,
@@ -249,10 +252,11 @@ export const BackgroundDescription: React.FC<IBackgroundDescProps> = ({
               <Typography variant="body2" mb={1}>
                 Description
               </Typography>
-              <Box sx={{ display: 'flex', justifyContent: 'stretch' }}>
-                <TextAreaUi
+              <Box>
+                <TextEditor
                   value={description}
-                  onChange={(e) => updateDescription?.(e.target.value)}
+                  onChange={updateDescription}
+                  onChangeDelta={updateDescriptionDelta}
                 />
               </Box>
             </>

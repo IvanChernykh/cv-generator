@@ -2,8 +2,8 @@ import React from 'react';
 import { AccordionUi } from '../../../ui/accordion/accordion';
 import { SummaryAccordion } from '../../../ui/accordion/summary';
 import { Box, Grid, TextField, Typography } from '@mui/material';
-import { TextAreaUi } from '../../../ui/textarea/textarea';
 import { ProjectsFields } from '../../../../redux/resume/types';
+import { TextEditor } from '../../../ui/textEditor/textEditor';
 
 interface IProjectItemProps {
   id: string;
@@ -68,10 +68,11 @@ export const ProjectItem: React.FC<IProjectItemProps> = ({
           <Typography variant="body2" mb={1}>
             Description
           </Typography>
-          <Box sx={{ display: 'flex', justifyContent: 'stretch' }}>
-            <TextAreaUi
+          <Box>
+            <TextEditor
               value={desc}
-              onChange={(e) => handleChange(e.target.value, 'description')}
+              onChange={(v) => handleChange(v, 'description')}
+              onChangeDelta={(v) => handleChange(v, 'descriptionDelta')}
             />
           </Box>
         </Box>
