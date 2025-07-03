@@ -1,6 +1,6 @@
 {
-  "name": "cv-generator-fe",
-  "homepage": "https://ivanchernykh.github.io/cv-generator-build",
+  "name": "resume-builder",
+  "homepage": "https://ivanchernykh.github.io/resume-builder",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -62,6 +62,5 @@
     "typescript": "*"
   },
   "main": "index.js",
-  "repository": "https://github.com/IvanChernykh/cv-generator.git",
   "license": "MIT"
 }

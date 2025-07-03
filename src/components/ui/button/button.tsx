@@ -1,5 +1,5 @@
 import { Button, ButtonProps } from '@mui/material';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 interface IButtonUiProps extends ButtonProps {}
 

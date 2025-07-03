@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
-import { TextAreaUi } from '../../../ui/textarea/textarea';
 import { SectionTitle } from '../../../ui/text/sectionTitle';
 import { SectionSubTitle } from '../../../ui/text/sectionSubTitle';
 import { TextEditor } from '../../../ui/textEditor/textEditor';

@@ -10,7 +10,6 @@ import {
   Typography,
 } from '@mui/material';
 import { AccordionUi } from '../../../ui/accordion/accordion';
-import { TextAreaUi } from '../../../ui/textarea/textarea';
 import { DatePickerUi } from '../../../ui/datePicker/datePicker';
 import { Colors } from '../../../../utils/constants/colors';
 import { SummaryAccordion } from '../../../ui/accordion/summary';
