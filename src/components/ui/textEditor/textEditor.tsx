@@ -27,7 +27,7 @@ export const TextEditor: React.FC<ITextEditorProps> = ({
   const quillConfig = useMemo(
     () => ({
       toolbar: {
-        container: [/* 'bold', { list: 'ordered' }, */ { list: 'bullet' }],
+        container: ['bold', /* { list: 'ordered' }, */ { list: 'bullet' }],
       },
     }),
     [],

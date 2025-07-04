@@ -19,7 +19,7 @@ const stylesRight = StyleSheet.create({
   itemLevelBar: {
     width: '100%',
     height: 2,
-    marginTop: 5,
+    marginTop: 4,
     backgroundColor: Colors.grayBg,
     position: 'relative',
   },

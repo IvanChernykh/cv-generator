@@ -23,13 +23,13 @@ export const SectionTitleEditable: React.FC<IProps> = ({
   const dispatch = useDispatch<AppDispatch>();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value.trim());
+    setValue(e.target.value);
   };
 
   const handleButton = () => {
     if (isEditing) {
-      if (value !== sectionValue) {
-        dispatch(updateSectionName({ value, section }));
+      if (value.trim() !== sectionValue) {
+        dispatch(updateSectionName({ value: value.trim(), section }));
       }
     } else {
       setValue(sectionValue);

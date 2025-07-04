@@ -82,6 +82,9 @@ export const Education: React.FC<IEducationProps> = ({
                 updateStartEndDate={(value: string) => {
                   handleUpdateItem(id, value, 'startEndDate');
                 }}
+                updateDescriptionDelta={(value: string) => {
+                  handleUpdateItem(id, value, 'descriptionDelta');
+                }}
                 updateDescription={(value: string) => {
                   handleUpdateItem(id, value, 'description');
                 }}

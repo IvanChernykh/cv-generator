@@ -42,8 +42,8 @@ Font.registerHyphenationCallback((word) => [word]);
 
 const styles = StyleSheet.create({
   page: {
-    paddingVertical: 30,
-    paddingHorizontal: 40,
+    paddingVertical: 25,
+    paddingHorizontal: 35,
     backgroundColor: Colors.white,
     fontFamily: 'Open Sans',
   },
