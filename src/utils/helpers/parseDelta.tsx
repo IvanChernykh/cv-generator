@@ -24,9 +24,7 @@ export const deltaToJsx = (delta: string) => {
   try {
     parsed = JSON.parse(delta);
   } catch (e) {
-    return (
-      <Text style={{ color: 'red', fontSize: 12 }}>Some error occured</Text>
-    );
+    parsed = [];
   }
 
   const blocks: Block[] = [];
