@@ -12,6 +12,7 @@ import { Courses } from './Courses';
 export default connect(
   (state: StoreType) => ({
     courses: state.resume.courses,
+    sectionName: state.resume.sectionNames.courses,
   }),
   {
     addSectionItem,

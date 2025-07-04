@@ -10,6 +10,7 @@ import {
   updateSectionList,
   updateResume,
   setSummaryDelta,
+  updateSectionName,
 } from './actions';
 import {
   AddSectionItemPayload,
@@ -18,6 +19,7 @@ import {
   SetDetailsFieldsPayload,
   UpdateSectionListPayload,
   UpdateSectionItemPayload,
+  UpdateSectionNamePayload,
 } from './types';
 import { uid } from '../../utils/helpers/generateId';
 import {
@@ -44,6 +46,17 @@ export const defaultState: IResumeState = {
     city: '',
     photo: '',
   },
+  sectionNames: {
+    contacts: 'Details',
+    summary: 'Summary',
+    workExpeprience: 'Employment History',
+    education: 'Education',
+    projects: 'Projects',
+    links: 'Links',
+    skills: 'Skills',
+    languages: 'Languages',
+    courses: 'Courses',
+  },
   summary: '',
   summaryDelta: '',
   workExpeprience: [],
@@ -57,36 +70,47 @@ export const defaultState: IResumeState = {
 
 export default handleActions<IResumeState, any>(
   {
-    [`${setCvName}`]: (state, { payload }: Action<string>) => ({
+    [`${setCvName}`]: (state, { payload }: Action<string>): IResumeState => ({
       ...state,
       cvName: payload,
     }),
-    [`${setSummary}`]: (state, { payload }: Action<string>) => ({
+
+    [`${setSummary}`]: (state, { payload }: Action<string>): IResumeState => ({
       ...state,
       summary: payload,
     }),
-    [`${setSummaryDelta}`]: (state, { payload }: Action<string>) => ({
+
+    [`${setSummaryDelta}`]: (
+      state,
+      { payload }: Action<string>,
+    ): IResumeState => ({
       ...state,
       summaryDelta: payload,
     }),
+
     [`${setDetailsFields}`]: (
       state,
       { payload }: Action<SetDetailsFieldsPayload>,
-    ) => ({
+    ): IResumeState => ({
       ...state,
       details: {
         ...state.details,
         [payload.field]: payload.value,
       },
     }),
-    [`${setDetailsPhoto}`]: (state, { payload }: Action<string>) => ({
+
+    [`${setDetailsPhoto}`]: (
+      state,
+      { payload }: Action<string>,
+    ): IResumeState => ({
       ...state,
       details: { ...state.details, photo: payload },
     }),
+
     [`${addSectionItem}`]: (
       state,
       { payload }: Action<AddSectionItemPayload>,
-    ) => {
+    ): IResumeState => {
       let newItem = { id: uid() };
 
       switch (payload.field) {
@@ -117,19 +141,21 @@ export default handleActions<IResumeState, any>(
         [payload.field]: [...state[payload.field], newItem],
       };
     },
+
     [`${deleteSectionItem}`]: (
       state,
       { payload }: Action<DeleteSectionItemPayload>,
-    ) => ({
+    ): IResumeState => ({
       ...state,
       [payload.field]: state[payload.field].filter(
         (item) => item.id !== payload.id,
       ),
     }),
+
     [`${updateSectionItem}`]: (
       state,
       { payload }: Action<UpdateSectionItemPayload<string>>,
-    ) => ({
+    ): IResumeState => ({
       ...state,
       [payload.list]: state[payload.list].map((item) =>
         item.id === payload.id
@@ -137,14 +163,27 @@ export default handleActions<IResumeState, any>(
           : item,
       ),
     }),
+
     [`${updateSectionList}`]: (
       state,
       { payload }: Action<UpdateSectionListPayload>,
-    ) => ({
+    ): IResumeState => ({
       ...state,
       [payload.listName]: [...payload.value],
     }),
-    [`${updateResume}`]: (state, { payload }: Action<IResume>) => ({
+
+    [`${updateSectionName}`]: (
+      state,
+      { payload }: Action<UpdateSectionNamePayload>,
+    ): IResumeState => ({
+      ...state,
+      sectionNames: { ...state.sectionNames, [payload.section]: payload.value },
+    }),
+
+    [`${updateResume}`]: (
+      state,
+      { payload }: Action<IResume>,
+    ): IResumeState => ({
       ...state,
       ...payload,
     }),

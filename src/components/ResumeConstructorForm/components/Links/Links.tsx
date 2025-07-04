@@ -2,7 +2,6 @@ import React from 'react';
 import { Box } from '@mui/material';
 import { AddMoreBtn } from '../../../ui/addMoreBtn/addMoreBtn';
 import { LinkItem } from './LinkItem';
-import { SectionTitle } from '../../../ui/text/sectionTitle';
 import { ILink } from '../../../../utils/types/resume';
 import {
   AddSectionItemPayload,
@@ -13,9 +12,11 @@ import {
 } from '../../../../redux/resume/types';
 import { DraggableCustom } from '../../../ui/dragAndDrop/DraggableCustom';
 import { DragDropWrapper } from '../../../ui/dragAndDrop/DragDropContextCustom';
+import { SectionTitleEditable } from '../../../ui/text/sectionTitleEditable';
 
 interface ILinksProps {
   links: ILink[];
+  sectionName: string;
   addSectionItem: (payload: AddSectionItemPayload) => void;
   deleteSectionItem: (payload: DeleteSectionItemPayload) => void;
   updateSectionItem: (payload: UpdateSectionItemPayload<LinksFields>) => void;
@@ -24,6 +25,7 @@ interface ILinksProps {
 
 export const Links: React.FC<ILinksProps> = ({
   links,
+  sectionName,
   addSectionItem,
   deleteSectionItem,
   updateSectionItem,
@@ -39,7 +41,7 @@ export const Links: React.FC<ILinksProps> = ({
 
   return (
     <Box mb={4}>
-      <SectionTitle>Social Links and websites</SectionTitle>
+      <SectionTitleEditable sectionValue={sectionName} section="links" />
       <DragDropWrapper
         list={links}
         listName="links"

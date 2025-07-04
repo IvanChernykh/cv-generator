@@ -12,6 +12,7 @@ import { WorkExperience } from './WorkExperience';
 export default connect(
   (state: StoreType) => ({
     workExpeprience: state.resume.workExpeprience,
+    sectionName: state.resume.sectionNames.workExpeprience,
   }),
   {
     addSectionItem,

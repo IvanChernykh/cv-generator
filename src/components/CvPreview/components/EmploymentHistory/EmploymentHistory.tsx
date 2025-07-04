@@ -12,14 +12,16 @@ import { deltaToJsx } from '../../../../utils/helpers/parseDelta';
 
 interface IEmploymentHistoryProps {
   workExpeprience: IWorkExperience[];
+  sectionName: string;
 }
 
 export const EmploymentHistory: React.FC<IEmploymentHistoryProps> = ({
   workExpeprience,
+  sectionName,
 }) => {
   return (
     <SectionContainer>
-      <LeftSectionTitle>Employment History</LeftSectionTitle>
+      <LeftSectionTitle>{sectionName}</LeftSectionTitle>
       {workExpeprience.map(
         (
           { id, jobTitle, employer, city, startEndDate, descriptionDelta },

@@ -11,12 +11,13 @@ import { combineWordsWithComma } from '../../../../utils/helpers/combineWordsWit
 
 interface ICoursesProps {
   courses: ICourse[];
+  sectionName: string;
 }
 
-export const Courses: React.FC<ICoursesProps> = ({ courses }) => {
+export const Courses: React.FC<ICoursesProps> = ({ courses, sectionName }) => {
   return (
     <SectionContainer>
-      <LeftSectionTitle>Courses</LeftSectionTitle>
+      <LeftSectionTitle>{sectionName}</LeftSectionTitle>
       {courses.map(({ id, course, institution, startEndDate }, idx) => (
         <LeftItemContainer key={`${id}-${idx}`}>
           <LeftItemTitle>

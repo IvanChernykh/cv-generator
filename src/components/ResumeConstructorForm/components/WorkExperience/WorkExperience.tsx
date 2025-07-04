@@ -2,7 +2,6 @@ import React from 'react';
 import { Box } from '@mui/material';
 import { AddMoreBtn } from '../../../ui/addMoreBtn/addMoreBtn';
 import { BackgroundDescription } from '../BackgroundDescription/BackgroundDescription';
-import { SectionTitle } from '../../../ui/text/sectionTitle';
 import { SectionSubTitle } from '../../../ui/text/sectionSubTitle';
 import { IWorkExperience } from '../../../../utils/types/resume';
 import {
@@ -14,9 +13,11 @@ import {
 } from '../../../../redux/resume/types';
 import { DragDropWrapper } from '../../../ui/dragAndDrop/DragDropContextCustom';
 import { DraggableCustom } from '../../../ui/dragAndDrop/DraggableCustom';
+import { SectionTitleEditable } from '../../../ui/text/sectionTitleEditable';
 
 interface IWorkExperienceProps {
   workExpeprience: IWorkExperience[];
+  sectionName: string;
   addSectionItem: (payload: AddSectionItemPayload) => void;
   deleteSectionItem: (payload: DeleteSectionItemPayload) => void;
   updateSectionItem: (
@@ -27,6 +28,7 @@ interface IWorkExperienceProps {
 
 export const WorkExperience: React.FC<IWorkExperienceProps> = ({
   workExpeprience,
+  sectionName,
   addSectionItem,
   deleteSectionItem,
   updateSectionItem,
@@ -55,7 +57,10 @@ export const WorkExperience: React.FC<IWorkExperienceProps> = ({
 
   return (
     <Box mb={4}>
-      <SectionTitle>Work Experience</SectionTitle>
+      <SectionTitleEditable
+        sectionValue={sectionName}
+        section="workExpeprience"
+      />
       <SectionSubTitle>
         Show your relevant experience (last 10 years).
       </SectionSubTitle>

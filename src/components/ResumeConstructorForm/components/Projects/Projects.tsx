@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { SectionTitle } from '../../../ui/text/sectionTitle';
 import { SectionSubTitle } from '../../../ui/text/sectionSubTitle';
 import { IProject } from '../../../../utils/types/resume';
 import { AddMoreBtn } from '../../../ui/addMoreBtn/addMoreBtn';
@@ -14,9 +13,11 @@ import {
 import { ProjectItem } from './ProjectItem';
 import { DragDropWrapper } from '../../../ui/dragAndDrop/DragDropContextCustom';
 import { DraggableCustom } from '../../../ui/dragAndDrop/DraggableCustom';
+import { SectionTitleEditable } from '../../../ui/text/sectionTitleEditable';
 
 interface IProjectsProps {
   projects: IProject[];
+  sectionName: string;
   addSectionItem: (payload: AddSectionItemPayload) => void;
   deleteSectionItem: (payload: DeleteSectionItemPayload) => void;
   updateSectionItem: (
@@ -27,6 +28,7 @@ interface IProjectsProps {
 
 export const Projects: React.FC<IProjectsProps> = ({
   projects,
+  sectionName,
   addSectionItem,
   deleteSectionItem,
   updateSectionItem,
@@ -55,7 +57,7 @@ export const Projects: React.FC<IProjectsProps> = ({
 
   return (
     <Box mb={4}>
-      <SectionTitle>Projects</SectionTitle>
+      <SectionTitleEditable sectionValue={sectionName} section="projects" />
       <SectionSubTitle>Show your personal projects.</SectionSubTitle>
       <DragDropWrapper
         list={projects}

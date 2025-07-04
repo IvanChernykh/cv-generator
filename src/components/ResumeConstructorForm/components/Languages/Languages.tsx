@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import { AddMoreBtn } from '../../../ui/addMoreBtn/addMoreBtn';
-import { SectionTitle } from '../../../ui/text/sectionTitle';
 import { LanguageItem } from './LanguageItem';
 import { ILanguage } from '../../../../utils/types/resume';
 import {
@@ -13,9 +12,11 @@ import {
 } from '../../../../redux/resume/types';
 import { DraggableCustom } from '../../../ui/dragAndDrop/DraggableCustom';
 import { DragDropWrapper } from '../../../ui/dragAndDrop/DragDropContextCustom';
+import { SectionTitleEditable } from '../../../ui/text/sectionTitleEditable';
 
 interface ILanguagesProps {
   languages: ILanguage[];
+  sectionName: string;
   updateSectionItem: (
     payload: UpdateSectionItemPayload<LanguagesFields>,
   ) => void;
@@ -26,6 +27,7 @@ interface ILanguagesProps {
 
 export const Languages: React.FC<ILanguagesProps> = ({
   languages,
+  sectionName,
   updateSectionItem,
   addSectionItem,
   deleteSectionItem,
@@ -41,7 +43,7 @@ export const Languages: React.FC<ILanguagesProps> = ({
 
   return (
     <Box mb={4}>
-      <SectionTitle>Languages</SectionTitle>
+      <SectionTitleEditable sectionValue={sectionName} section="languages" />
       <DragDropWrapper
         list={languages}
         listName="languages"

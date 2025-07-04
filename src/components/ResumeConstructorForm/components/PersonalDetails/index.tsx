@@ -9,6 +9,7 @@ import { StoreType } from '../../../../redux/rootReducer';
 export default connect(
   (state: StoreType) => ({
     details: state.resume.details,
+    sectionName: state.resume.sectionNames.contacts,
   }),
   { setDetailsFields, setDetailsPhoto },
 )(PersonalDetails);

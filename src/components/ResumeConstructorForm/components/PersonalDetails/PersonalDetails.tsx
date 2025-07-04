@@ -1,18 +1,20 @@
-import { Box, Grid, TextField } from '@mui/material';
 import React from 'react';
+import { Box, Grid, TextField } from '@mui/material';
 import { ImageInput } from '../../../ui/imageInput/imageInput';
-import { SectionTitle } from '../../../ui/text/sectionTitle';
 import { IDetails } from '../../../../utils/types/resume';
 import { SetDetailsFieldsPayload } from '../../../../redux/resume/types';
+import { SectionTitleEditable } from '../../../ui/text/sectionTitleEditable';
 
 interface IPersonalDetailsProps {
   details: IDetails;
+  sectionName: string;
   setDetailsFields: (payload: SetDetailsFieldsPayload) => void;
   setDetailsPhoto: (payload: string) => void;
 }
 
 export const PersonalDetails: React.FC<IPersonalDetailsProps> = ({
   details,
+  sectionName,
   setDetailsFields,
   setDetailsPhoto,
 }) => {
@@ -25,7 +27,7 @@ export const PersonalDetails: React.FC<IPersonalDetailsProps> = ({
 
   return (
     <Box mb={4}>
-      <SectionTitle>Personal Details</SectionTitle>
+      <SectionTitleEditable sectionValue={sectionName} section="contacts" />
       <Grid container spacing={4}>
         <Grid item xs={6}>
           <TextField

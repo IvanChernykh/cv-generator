@@ -2,6 +2,7 @@ export interface IResume {
   id: string;
   cvName: string;
   details: IDetails;
+  sectionNames: ISectionNames;
   summary: string;
   workExpeprience: IWorkExperience[];
   education: IEducation[];
@@ -10,6 +11,18 @@ export interface IResume {
   skills: ISkill[];
   languages: ILanguage[];
   courses: ICourse[];
+}
+
+export interface ISectionNames {
+  contacts: string;
+  summary: string;
+  workExpeprience: string;
+  education: string;
+  projects: string;
+  links: string;
+  skills: string;
+  languages: string;
+  courses: string;
 }
 
 export interface IDetails {

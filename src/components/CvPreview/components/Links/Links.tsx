@@ -8,12 +8,13 @@ import {
 
 interface ILinksProps {
   links: ILink[];
+  sectionName: string;
 }
 
-export const Links: React.FC<ILinksProps> = ({ links }) => {
+export const Links: React.FC<ILinksProps> = ({ links, sectionName }) => {
   return (
     <SectionContainer>
-      <RightSectionTitle>Links</RightSectionTitle>
+      <RightSectionTitle>{sectionName}</RightSectionTitle>
       {links.map(({ id, title, link }, idx) => (
         <LinkCustom key={`${id}-${idx}`} src={link}>
           {title}

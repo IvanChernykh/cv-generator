@@ -6,6 +6,7 @@ import { StoreType } from '../../../../redux/rootReducer';
 export default connect(
   (state: StoreType) => ({
     summary: state.resume.summary,
+    sectionName: state.resume.sectionNames.summary,
   }),
   { setSummary, setSummaryDelta },
 )(Summary);

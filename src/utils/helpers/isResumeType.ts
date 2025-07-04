@@ -32,15 +32,16 @@ const checkCorrectKeysInSections = (key: string, iKey: string) => {
   );
 };
 
-export const isCorrectType = (obj: any): boolean => {
-  if (!Object.keys(obj).length) {
+export const isCorrectType = (resumeObj: any): boolean => {
+  if (!Object.keys(resumeObj).length) {
     return false;
   }
   let isValid = true;
 
   const detailsKeys = Object.keys(defaultState.details);
+  const sectionNamesKeys = Object.keys(defaultState.sectionNames);
 
-  Object.entries(obj).forEach(([key, val]: [string, any]) => {
+  Object.entries(resumeObj).forEach(([key, val]: [string, any]) => {
     if (key in defaultState) {
       if (Array.isArray(val)) {
         val.forEach((item) => {
@@ -49,6 +50,7 @@ export const isCorrectType = (obj: any): boolean => {
               if (checkCorrectTypesInSection(iVal, iKey, key)) {
                 isValid = false;
               }
+
               if (checkCorrectKeysInSections(key, iKey)) {
                 isValid = false;
               }
@@ -58,11 +60,21 @@ export const isCorrectType = (obj: any): boolean => {
           }
         });
       } else if (typeof val === 'object') {
-        Object.entries(val).forEach(([dKey, dVal]: [any, any]) => {
-          if (!detailsKeys.includes(dKey) || typeof dVal !== 'string') {
-            isValid = false;
-          }
-        });
+        if (key === 'details') {
+          Object.entries(val).forEach(([dKey, dVal]: [any, any]) => {
+            if (!detailsKeys.includes(dKey) || typeof dVal !== 'string') {
+              isValid = false;
+            }
+          });
+        }
+
+        if (key === 'sectionNames') {
+          Object.entries(val).forEach(([dKey, dVal]: [any, any]) => {
+            if (!sectionNamesKeys.includes(dKey) || typeof dVal !== 'string') {
+              isValid = false;
+            }
+          });
+        }
       } else if (typeof val !== 'string') {
         isValid = false;
       }
@@ -70,5 +82,6 @@ export const isCorrectType = (obj: any): boolean => {
       isValid = false;
     }
   });
+
   return isValid;
 };

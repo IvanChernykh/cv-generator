@@ -2,7 +2,6 @@ import React from 'react';
 import { Box } from '@mui/material';
 import { AddMoreBtn } from '../../../ui/addMoreBtn/addMoreBtn';
 import { BackgroundDescription } from '../BackgroundDescription/BackgroundDescription';
-import { SectionTitle } from '../../../ui/text/sectionTitle';
 import { SectionSubTitle } from '../../../ui/text/sectionSubTitle';
 import { IEducation } from '../../../../utils/types/resume';
 import {
@@ -14,9 +13,11 @@ import {
 } from '../../../../redux/resume/types';
 import { DraggableCustom } from '../../../ui/dragAndDrop/DraggableCustom';
 import { DragDropWrapper } from '../../../ui/dragAndDrop/DragDropContextCustom';
+import { SectionTitleEditable } from '../../../ui/text/sectionTitleEditable';
 
 interface IEducationProps {
   education: IEducation[];
+  sectionName: string;
   addSectionItem: (payload: AddSectionItemPayload) => void;
   deleteSectionItem: (payload: DeleteSectionItemPayload) => void;
   updateSectionItem: (
@@ -27,6 +28,7 @@ interface IEducationProps {
 
 export const Education: React.FC<IEducationProps> = ({
   education,
+  sectionName,
   addSectionItem,
   deleteSectionItem,
   updateSectionItem,
@@ -55,7 +57,7 @@ export const Education: React.FC<IEducationProps> = ({
 
   return (
     <Box mb={4}>
-      <SectionTitle>Education</SectionTitle>
+      <SectionTitleEditable sectionValue={sectionName} section="education" />
       <SectionSubTitle>Describe your education.</SectionSubTitle>
       <DragDropWrapper
         list={education}

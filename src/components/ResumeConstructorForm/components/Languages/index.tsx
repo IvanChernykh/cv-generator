@@ -11,6 +11,7 @@ import {
 export default connect(
   (state: StoreType) => ({
     languages: state.resume.languages,
+    sectionName: state.resume.sectionNames.languages,
   }),
   {
     addSectionItem,

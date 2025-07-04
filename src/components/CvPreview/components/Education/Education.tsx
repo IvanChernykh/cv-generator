@@ -12,12 +12,16 @@ import { deltaToJsx } from '../../../../utils/helpers/parseDelta';
 
 interface IEducationProps {
   education: IEducation[];
+  sectionName: string;
 }
 
-export const Education: React.FC<IEducationProps> = ({ education }) => {
+export const Education: React.FC<IEducationProps> = ({
+  education,
+  sectionName,
+}) => {
   return (
     <SectionContainer>
-      <LeftSectionTitle>Education</LeftSectionTitle>
+      <LeftSectionTitle>{sectionName}</LeftSectionTitle>
       {education.map(
         ({ id, school, degree, city, startEndDate, descriptionDelta }, idx) => (
           <LeftItemContainer key={`${id}-${idx}`}>

@@ -12,6 +12,7 @@ import {
 export default connect(
   (state: StoreType) => ({
     projects: state.resume.projects,
+    sectionName: state.resume.sectionNames.projects,
   }),
   { addSectionItem, deleteSectionItem, updateSectionItem, updateSectionList },
 )(Projects);

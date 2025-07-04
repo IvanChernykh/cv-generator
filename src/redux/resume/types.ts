@@ -6,6 +6,7 @@ import {
   ILink,
   IProject,
   IResume,
+  ISectionNames,
   ISkill,
   IWorkExperience,
 } from '../../utils/types/resume';
@@ -16,7 +17,7 @@ export interface IResumeState extends IResume {
 
 export type SectionsWithLists = keyof Omit<
   IResume,
-  'summary' | 'details' | 'cvName' | 'id'
+  'summary' | 'details' | 'cvName' | 'id' | 'sectionNames'
 >;
 
 export type SetDetailsFieldsPayload = {
@@ -41,6 +42,8 @@ export type SkillsFields = keyof Omit<ISkill, 'id'>;
 export type LanguagesFields = keyof Omit<ILanguage, 'id'>;
 export type CoursesFields = keyof Omit<ICourse, 'id'>;
 
+export type SectionNamesFields = keyof ISectionNames;
+
 export type UpdateSectionItemPayload<T> = {
   id: string;
   list: SectionsWithLists;
@@ -51,4 +54,9 @@ export type UpdateSectionItemPayload<T> = {
 export type UpdateSectionListPayload = {
   listName: SectionsWithLists;
   value: IResume[SectionsWithLists];
+};
+
+export type UpdateSectionNamePayload = {
+  value: string;
+  section: SectionNamesFields;
 };

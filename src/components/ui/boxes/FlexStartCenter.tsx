@@ -6,6 +6,7 @@ interface IFlexStartCenterProps extends BoxProps {}
 export const FlexStartCenter: React.FC<IFlexStartCenterProps> = ({
   children,
   sx,
+  ...props
 }) => {
   return (
     <Box
@@ -14,6 +15,7 @@ export const FlexStartCenter: React.FC<IFlexStartCenterProps> = ({
         alignItems: 'center',
         ...sx,
       }}
+      {...props}
     >
       {children}
     </Box>

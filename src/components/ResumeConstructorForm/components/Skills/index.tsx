@@ -12,6 +12,7 @@ import { Skills } from './Skills';
 export default connect(
   (state: StoreType) => ({
     skills: state.resume.skills,
+    sectionName: state.resume.sectionNames.skills,
   }),
   {
     addSectionItem,

@@ -8,6 +8,7 @@ import {
 
 interface ILanguagesProps {
   languages: ILanguage[];
+  sectionName: string;
 }
 
 const getLevelInPercent = (level: string) => {
@@ -29,10 +30,13 @@ const getLevelInPercent = (level: string) => {
   }
 };
 
-export const Languages: React.FC<ILanguagesProps> = ({ languages }) => {
+export const Languages: React.FC<ILanguagesProps> = ({
+  languages,
+  sectionName,
+}) => {
   return (
     <SectionContainer>
-      <RightSectionTitle>Languages</RightSectionTitle>
+      <RightSectionTitle>{sectionName}</RightSectionTitle>
       {languages.map(({ id, title, level }, idx) => {
         return (
           <RightItemWithLevel

@@ -9,9 +9,10 @@ import {
 
 interface IDetailsProps {
   details: IDetails;
+  sectionName: string;
 }
 
-export const Details: React.FC<IDetailsProps> = ({ details }) => {
+export const Details: React.FC<IDetailsProps> = ({ details, sectionName }) => {
   const { city, country, phone, email } = details;
 
   if (![city, country, phone, email].filter(Boolean).length) {
@@ -20,7 +21,7 @@ export const Details: React.FC<IDetailsProps> = ({ details }) => {
 
   return (
     <SectionContainer>
-      <RightSectionTitle>Details</RightSectionTitle>
+      <RightSectionTitle>{sectionName}</RightSectionTitle>
       <ItemText>{city}</ItemText>
       <ItemText>{country}</ItemText>
       <ItemText>{phone}</ItemText>

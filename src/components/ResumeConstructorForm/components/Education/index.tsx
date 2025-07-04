@@ -12,6 +12,7 @@ import { Education } from './Education';
 export default connect(
   (state: StoreType) => ({
     education: state.resume.education,
+    sectionName: state.resume.sectionNames.education,
   }),
   {
     addSectionItem,

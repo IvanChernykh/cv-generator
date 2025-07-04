@@ -70,6 +70,7 @@ export const CvPreview: React.FC<ICvPreviewProps> = ({ resume }) => {
     skills,
     languages,
     courses,
+    sectionNames,
   } = resume;
 
   const [isChanged, setIsChanged] = useState<boolean>(false);
@@ -134,20 +135,53 @@ export const CvPreview: React.FC<ICvPreviewProps> = ({ resume }) => {
             <View style={styles.sectionsContainer}>
               <View style={styles.left}>
                 {!isEmpty(summary) && (
-                  <SummarySection summary={parsedSummary} />
+                  <SummarySection
+                    summary={parsedSummary}
+                    sectionName={sectionNames.summary}
+                  />
                 )}
                 {!!workExpeprience.length && (
-                  <EmploymentHistory workExpeprience={workExpeprience} />
+                  <EmploymentHistory
+                    workExpeprience={workExpeprience}
+                    sectionName={sectionNames.workExpeprience}
+                  />
                 )}
-                {!!projects.length && <Projects projects={projects} />}
-                {!!education.length && <Education education={education} />}
-                {!!courses.length && <Courses courses={courses} />}
+                {!!projects.length && (
+                  <Projects
+                    projects={projects}
+                    sectionName={sectionNames.projects}
+                  />
+                )}
+                {!!education.length && (
+                  <Education
+                    education={education}
+                    sectionName={sectionNames.education}
+                  />
+                )}
+                {!!courses.length && (
+                  <Courses
+                    courses={courses}
+                    sectionName={sectionNames.courses}
+                  />
+                )}
               </View>
               <View style={styles.right}>
-                <Details details={details} />
-                {!!links.length && <Links links={links} />}
-                {!!skills.length && <Skills skills={skills} />}
-                {!!languages.length && <Languages languages={languages} />}
+                <Details
+                  details={details}
+                  sectionName={sectionNames.contacts}
+                />
+                {!!links.length && (
+                  <Links links={links} sectionName={sectionNames.links} />
+                )}
+                {!!skills.length && (
+                  <Skills skills={skills} sectionName={sectionNames.skills} />
+                )}
+                {!!languages.length && (
+                  <Languages
+                    languages={languages}
+                    sectionName={sectionNames.languages}
+                  />
+                )}
               </View>
             </View>
           </Page>

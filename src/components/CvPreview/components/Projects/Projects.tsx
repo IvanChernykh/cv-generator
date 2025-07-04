@@ -12,12 +12,16 @@ import { deltaToJsx } from '../../../../utils/helpers/parseDelta';
 
 interface IEmploymentHistoryProps {
   projects: IProject[];
+  sectionName: string;
 }
 
-export const Projects: React.FC<IEmploymentHistoryProps> = ({ projects }) => {
+export const Projects: React.FC<IEmploymentHistoryProps> = ({
+  projects,
+  sectionName,
+}) => {
   return (
     <SectionContainer>
-      <LeftSectionTitle>Projects</LeftSectionTitle>
+      <LeftSectionTitle>{sectionName}</LeftSectionTitle>
       {projects.map(
         ({ id, title, link, descriptionDelta, linkToRepo }, idx) => (
           <LeftItemContainer key={`${id}-${idx}`}>

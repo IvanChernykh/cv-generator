@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import { AddMoreBtn } from '../../../ui/addMoreBtn/addMoreBtn';
-import { SectionTitle } from '../../../ui/text/sectionTitle';
 import { SkillItem } from './SkillItem';
 import { ISkill } from '../../../../utils/types/resume';
 import {
@@ -13,9 +12,11 @@ import {
 } from '../../../../redux/resume/types';
 import { DraggableCustom } from '../../../ui/dragAndDrop/DraggableCustom';
 import { DragDropWrapper } from '../../../ui/dragAndDrop/DragDropContextCustom';
+import { SectionTitleEditable } from '../../../ui/text/sectionTitleEditable';
 
 interface ISkillsProps {
   skills: ISkill[];
+  sectionName: string;
   addSectionItem: (payload: AddSectionItemPayload) => void;
   deleteSectionItem: (payload: DeleteSectionItemPayload) => void;
   updateSectionItem: (payload: UpdateSectionItemPayload<SkillsFields>) => void;
@@ -24,6 +25,7 @@ interface ISkillsProps {
 
 export const Skills: React.FC<ISkillsProps> = ({
   skills,
+  sectionName,
   addSectionItem,
   deleteSectionItem,
   updateSectionItem,
@@ -39,7 +41,7 @@ export const Skills: React.FC<ISkillsProps> = ({
 
   return (
     <Box mb={4}>
-      <SectionTitle>Skills</SectionTitle>
+      <SectionTitleEditable sectionValue={sectionName} section="skills" />
       <DragDropWrapper
         list={skills}
         listName="skills"
