@@ -28,7 +28,9 @@ export const SectionTitleEditable: React.FC<IProps> = ({
 
   const handleButton = () => {
     if (isEditing) {
-      dispatch(updateSectionName({ value, section }));
+      if (value !== sectionValue) {
+        dispatch(updateSectionName({ value, section }));
+      }
     } else {
       setValue(sectionValue);
     }
